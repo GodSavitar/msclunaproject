@@ -23,7 +23,7 @@ public class BotonesManager {
     public void eliminarYActualizar(JButton botonAEliminar) {
         botones.remove(botonAEliminar);
         for (JButton btn : botones) {
-            btn.setBackground(new Color(30, 30, 30));
+            btn.setBackground(new Color(59,153,97));
             btn.setForeground(Color.WHITE);
         }
     }

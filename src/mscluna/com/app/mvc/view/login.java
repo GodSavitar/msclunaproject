@@ -47,6 +47,7 @@ public class login extends javax.swing.JFrame {
         userfield = new javax.swing.JTextField();
         passfield = new javax.swing.JPasswordField();
         iconPass = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -56,13 +57,13 @@ public class login extends javax.swing.JFrame {
         bgpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mscMessage1.setFont(new java.awt.Font("SimSun", 0, 85)); // NOI18N
-        mscMessage1.setForeground(new java.awt.Color(0, 0, 0));
+        mscMessage1.setForeground(new java.awt.Color(0, 153, 153));
         mscMessage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mscMessage1.setText("LUNA");
         bgpanel.add(mscMessage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 290, 70));
 
         mscMessage2.setFont(new java.awt.Font("SimSun", 0, 40)); // NOI18N
-        mscMessage2.setForeground(new java.awt.Color(0, 0, 0));
+        mscMessage2.setForeground(new java.awt.Color(0, 205, 203));
         mscMessage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mscMessage2.setText("MISCELANEA");
         bgpanel.add(mscMessage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 290, 70));
@@ -85,7 +86,8 @@ public class login extends javax.swing.JFrame {
         });
         bgpanel.add(eyeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 30, 40));
 
-        sendButton.setBackground(new Color(30,30,30));
+        sendButton.setBackground(new java.awt.Color(0, 153, 153));
+        sendButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         sendButton.setForeground(new java.awt.Color(255, 255, 255));
         sendButton.setText("Enviar");
         sendButton.setBorder(null);
@@ -101,10 +103,11 @@ public class login extends javax.swing.JFrame {
                 sendButtonActionPerformed(evt);
             }
         });
-        bgpanel.add(sendButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 57, 30));
+        bgpanel.add(sendButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 100, 30));
 
         userfield.setEditable(false);
         userfield.setBackground(new Color(30,30,30));
+        userfield.setBackground(new java.awt.Color(255, 255, 255));
         userfield.setForeground(new java.awt.Color(102, 102, 102));
         userfield.setText("Usuario");
         userfield.setToolTipText("");
@@ -124,6 +127,7 @@ public class login extends javax.swing.JFrame {
 
         passfield.setEditable(false);
         passfield.setBackground(new Color(30,30,30));
+        passfield.setBackground(new java.awt.Color(255, 255, 255));
         passfield.setForeground(new java.awt.Color(102, 102, 102));
         passfield.setText("Contraseña");
         passfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -139,6 +143,14 @@ public class login extends javax.swing.JFrame {
         iconPass.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/passIconPNG.png")));
         bgpanel.add(iconPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 300, 40, 36));
 
+        jButton1.setText("asd");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        bgpanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, -1, -1));
+
         getContentPane().add(bgpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         pack();
@@ -148,8 +160,8 @@ public class login extends javax.swing.JFrame {
         userfield.setEditable(true);
         if (userfield.getText().equals("Usuario")){
             userfield.setText("");
-            userfield.setForeground(new Color(195,195,195));
-            userfield.setCaretColor(Color.white);
+            userfield.setForeground(Color.black);
+            userfield.setCaretColor(Color.black);
         }
     }//GEN-LAST:event_userfieldMouseClicked
 
@@ -159,8 +171,8 @@ public class login extends javax.swing.JFrame {
         if (String.valueOf(passfield.getPassword()).equals("Contraseña")){
             passfield.setText("");
             passfield.setEchoChar('*');
-            passfield.setForeground(new Color(195,195,195));
-            passfield.setCaretColor(Color.white);
+            passfield.setForeground(Color.black);
+            passfield.setCaretColor(Color.black);
         }
     }//GEN-LAST:event_passfieldMouseClicked
 
@@ -215,6 +227,11 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sendButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        historialCortes hd = new historialCortes();
+        hd.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +275,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton eyeButton;
     private javax.swing.JLabel iconPass;
     private javax.swing.JLabel iconUser;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel mscMessage1;
     private javax.swing.JLabel mscMessage2;
     private javax.swing.JPasswordField passfield;

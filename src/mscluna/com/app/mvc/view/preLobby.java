@@ -4,12 +4,14 @@
  */
 package mscluna.com.app.mvc.view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author luiis
  */
 public class preLobby extends javax.swing.JFrame {
-    
+    private boolean eyeNew = true;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(preLobby.class.getName());
 
     /**
@@ -29,70 +31,124 @@ public class preLobby extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelInicio = new javax.swing.JPanel();
         inicioTurnoLabel = new javax.swing.JLabel();
         seleccionarCajeroLabel = new javax.swing.JLabel();
-        cajeroAtendiendo = new javax.swing.JComboBox<>();
+        seleccionarCajero = new javax.swing.JComboBox<>();
         dineroEnCajaLabel = new javax.swing.JLabel();
         dineroEnCaja = new javax.swing.JFormattedTextField();
         turnoLabel = new javax.swing.JLabel();
         turno = new javax.swing.JComboBox<>();
         empezarTurno = new javax.swing.JButton();
         cerrarButton = new javax.swing.JButton();
+        passLabel = new javax.swing.JLabel();
+        contraUser = new javax.swing.JPasswordField();
+        eyeButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(600, 400));
+        setMinimumSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(600, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelInicio.setBackground(new java.awt.Color(255, 255, 255));
+        panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        inicioTurnoLabel.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-        inicioTurnoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        inicioTurnoLabel.setBackground(new java.awt.Color(0, 205, 203));
+        inicioTurnoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        inicioTurnoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        inicioTurnoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inicioTurnoLabel.setText("Inicio de turno");
-        jPanel1.add(inicioTurnoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+        inicioTurnoLabel.setOpaque(true);
+        panelInicio.add(inicioTurnoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 560, 40));
 
         seleccionarCajeroLabel.setForeground(new java.awt.Color(0, 0, 0));
+        seleccionarCajeroLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seleccionarCajeroLabel.setText("Cajero:");
-        jPanel1.add(seleccionarCajeroLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 70, 30));
+        panelInicio.add(seleccionarCajeroLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 60, 30));
 
-        cajeroAtendiendo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ROOT" }));
-        jPanel1.add(cajeroAtendiendo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 150, 30));
+        seleccionarCajero.setBackground(new java.awt.Color(255, 255, 255));
+        seleccionarCajero.setForeground(new java.awt.Color(0, 0, 0));
+        seleccionarCajero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin" }));
+        panelInicio.add(seleccionarCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 160, 30));
 
         dineroEnCajaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        dineroEnCajaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dineroEnCajaLabel.setText("Dinero en caja:");
-        jPanel1.add(dineroEnCajaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 249, 100, 20));
+        panelInicio.add(dineroEnCajaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 100, 30));
 
+        dineroEnCaja.setBackground(new java.awt.Color(255, 255, 255));
+        dineroEnCaja.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        dineroEnCaja.setForeground(new java.awt.Color(0, 0, 0));
         dineroEnCaja.setText("800");
-        jPanel1.add(dineroEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 244, 150, 30));
+        panelInicio.add(dineroEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 160, 30));
 
         turnoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        turnoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         turnoLabel.setText("Turno:");
-        jPanel1.add(turnoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 70, 30));
+        panelInicio.add(turnoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 60, 30));
 
-        turno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mañana", "Tarde" }));
-        jPanel1.add(turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 150, 30));
+        turno.setBackground(new java.awt.Color(255, 255, 255));
+        turno.setForeground(new java.awt.Color(0, 0, 0));
+        turno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matutino", "Vespertino" }));
+        panelInicio.add(turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 160, 30));
 
+        empezarTurno.setBackground(new java.awt.Color(0, 153, 153));
+        empezarTurno.setForeground(new java.awt.Color(255, 255, 255));
         empezarTurno.setText("Empezar Turno");
+        empezarTurno.setBorder(null);
+        empezarTurno.setFocusPainted(false);
+        empezarTurno.setFocusable(false);
         empezarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 empezarTurnoActionPerformed(evt);
             }
         });
-        jPanel1.add(empezarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        panelInicio.add(empezarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 110, 30));
 
+        cerrarButton.setBackground(new java.awt.Color(0, 153, 153));
+        cerrarButton.setForeground(new java.awt.Color(255, 255, 255));
         cerrarButton.setText("Cerrar");
+        cerrarButton.setBorder(null);
+        cerrarButton.setFocusPainted(false);
+        cerrarButton.setFocusable(false);
         cerrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cerrarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 110, -1));
+        panelInicio.add(cerrarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 110, 30));
 
-        jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 500, 360));
+        passLabel.setForeground(new java.awt.Color(0, 0, 0));
+        passLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        passLabel.setText("Contraseña:");
+        panelInicio.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 80, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
+        contraUser.setBackground(new java.awt.Color(255, 255, 255));
+        contraUser.setForeground(new java.awt.Color(0, 0, 0));
+        contraUser.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panelInicio.add(contraUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 160, 30));
+
+        eyeButton.setVisible(false);
+        eyeButton.setBackground(null);
+        eyeButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceEyeO.png")));
+        eyeButton.setBorderPainted(false);
+        eyeButton.setContentAreaFilled(false);
+        eyeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eyeButton.setFocusPainted(false);
+        eyeButton.setFocusable(false);
+        eyeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eyeButtonMouseClicked(evt);
+            }
+        });
+        panelInicio.add(eyeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 30, 30));
+
+        jSeparator1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panelInicio.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 510, 270));
+
+        getContentPane().add(panelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -106,8 +162,20 @@ public class preLobby extends javax.swing.JFrame {
     private void cerrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarButtonActionPerformed
        System.exit(0);
     }//GEN-LAST:event_cerrarButtonActionPerformed
+
+    private void eyeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eyeButtonMouseClicked
+        if (eyeNew) {
+            eyeButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceEyeC.png")));
+            contraUser.setEchoChar((char)0);
+        } else {
+            eyeButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceEyeO.png")));
+            contraUser.setEchoChar('*');
+        }
+        eyeNew = !eyeNew; // Alternar estado
+    }//GEN-LAST:event_eyeButtonMouseClicked
+    
     public String getCajeroSeleccionado() {
-        return cajeroAtendiendo.getSelectedItem().toString();
+        return seleccionarCajero.getSelectedItem().toString();
     }
     public String getTurno(){
         return turno.getSelectedItem().toString();
@@ -141,14 +209,17 @@ public class preLobby extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cajeroAtendiendo;
     private javax.swing.JButton cerrarButton;
+    private javax.swing.JPasswordField contraUser;
     private javax.swing.JFormattedTextField dineroEnCaja;
     private javax.swing.JLabel dineroEnCajaLabel;
     private javax.swing.JButton empezarTurno;
+    private javax.swing.JButton eyeButton;
     private javax.swing.JLabel inicioTurnoLabel;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel panelInicio;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JComboBox<String> seleccionarCajero;
     private javax.swing.JLabel seleccionarCajeroLabel;
     private javax.swing.JComboBox<String> turno;
     private javax.swing.JLabel turnoLabel;
