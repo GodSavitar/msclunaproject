@@ -323,24 +323,25 @@ private void cargarInventarioATabla() {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         cortePanel = new javax.swing.JPanel();
-        welcomeLabel = new javax.swing.JLabel();
-        cajeroEnTurno = new javax.swing.JLabel();
         dineroEsperadoLabel = new javax.swing.JLabel();
         dineroEsperado = new javax.swing.JLabel();
         dineroEnCajaLabel = new javax.swing.JLabel();
         dineroEnCaja = new javax.swing.JFormattedTextField();
-        horaTurno = new javax.swing.JLabel();
         entradaLabel = new javax.swing.JLabel();
         entradasDeDinero = new javax.swing.JLabel();
         cortarButton = new javax.swing.JButton();
         cerrarTurnoButton = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
+        jPanel3 = new javax.swing.JPanel();
+        welcomeLabel = new javax.swing.JLabel();
+        cajeroEnTurno = new javax.swing.JLabel();
+        horaTurno = new javax.swing.JLabel();
         historialCortesButton = new javax.swing.JButton();
         historialPanel = new javax.swing.JPanel();
+        eliminarVentasAll = new javax.swing.JButton();
         labelEntradaProducto1 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         historialTable = new javax.swing.JTable();
-        eliminarVentasAll = new javax.swing.JButton();
         bgLobby = new javax.swing.JPanel();
         mscLabel = new javax.swing.JLabel();
         lunaLabel = new javax.swing.JLabel();
@@ -540,7 +541,7 @@ private void cargarInventarioATabla() {
             editarProdCategoriaActionPerformed(evt);
         }
     });
-    productosCodEntrada1.add(editarProdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+    productosCodEntrada1.add(editarProdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, -1, -1));
 
     eliminarProductoCategoria.setBackground(new java.awt.Color(65, 220, 127));
     eliminarProductoCategoria.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -553,7 +554,7 @@ private void cargarInventarioATabla() {
             eliminarProductoCategoriaActionPerformed(evt);
         }
     });
-    productosCodEntrada1.add(eliminarProductoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+    productosCodEntrada1.add(eliminarProductoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
 
     codProductoIngresar.setForeground(new java.awt.Color(0, 0, 0));
     codProductoIngresar.setText("Código de producto:");
@@ -628,7 +629,7 @@ private void cargarInventarioATabla() {
             aceptarEntradaProductoActionPerformed(evt);
         }
     });
-    productosCodEntrada1.add(aceptarEntradaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 120, 40));
+    productosCodEntrada1.add(aceptarEntradaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 330, 120, 40));
 
     jTabbedPane1.addTab("Productos Cod", productosCodEntrada1);
 
@@ -693,7 +694,7 @@ private void cargarInventarioATabla() {
             aceptarEntradaProductoGFVActionPerformed(evt);
         }
     });
-    productosGranelFrutVerdEntrada2.add(aceptarEntradaProductoGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 120, 40));
+    productosGranelFrutVerdEntrada2.add(aceptarEntradaProductoGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 330, 120, 40));
 
     editarProdCategoriaGFV.setBackground(new java.awt.Color(65, 220, 127));
     editarProdCategoriaGFV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -706,7 +707,7 @@ private void cargarInventarioATabla() {
             editarProdCategoriaGFVActionPerformed(evt);
         }
     });
-    productosGranelFrutVerdEntrada2.add(editarProdCategoriaGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+    productosGranelFrutVerdEntrada2.add(editarProdCategoriaGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, -1, -1));
 
     eliminarProductoCategoriaGFV.setBackground(new java.awt.Color(65, 220, 127));
     eliminarProductoCategoriaGFV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -719,7 +720,7 @@ private void cargarInventarioATabla() {
             eliminarProductoCategoriaGFVActionPerformed(evt);
         }
     });
-    productosGranelFrutVerdEntrada2.add(eliminarProductoCategoriaGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+    productosGranelFrutVerdEntrada2.add(eliminarProductoCategoriaGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
 
     precioPorKgIngresarGFV.setForeground(new java.awt.Color(0, 0, 0));
     precioPorKgIngresarGFV.setText("Precio p/Kg:");
@@ -831,16 +832,6 @@ private void cargarInventarioATabla() {
     cortePanel.setBackground(new java.awt.Color(255, 255, 255));
     cortePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    welcomeLabel.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-    welcomeLabel.setForeground(new java.awt.Color(0, 0, 0));
-    welcomeLabel.setText("Bienvenid@");
-    cortePanel.add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 18, 190, -1));
-
-    cajeroEnTurno.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-    cajeroEnTurno.setForeground(new java.awt.Color(0, 0, 0));
-    cortePanel.add(cajeroEnTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 16, 190, 40));
-    cajeroEnTurno.setText(cajero);
-
     dineroEsperadoLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
     dineroEsperadoLabel.setForeground(new java.awt.Color(0, 0, 0));
     dineroEsperadoLabel.setText("Dinero esperado en caja:");
@@ -856,19 +847,10 @@ private void cargarInventarioATabla() {
     cortePanel.add(dineroEnCajaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, 40));
     cortePanel.add(dineroEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 130, 40));
 
-    horaTurno.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
-    horaTurno.setForeground(new java.awt.Color(102, 102, 102));
-    cortePanel.add(horaTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 420, 30));
-    if(turno.equals("Matutino")){
-        horaTurno.setText("De 7:00 a.m a las 3:00 p.m");
-    } else {
-        horaTurno.setText("De las 3:00 p.m a las 10:00 p.m");
-    }
-
     entradaLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
     entradaLabel.setForeground(new java.awt.Color(0, 0, 0));
     entradaLabel.setText("Entradas de dinero:");
-    cortePanel.add(entradaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
+    cortePanel.add(entradaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, 30));
 
     entradasDeDinero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
     entradasDeDinero.setForeground(new java.awt.Color(255, 102, 0));
@@ -895,6 +877,28 @@ private void cargarInventarioATabla() {
     jSeparator4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     cortePanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 1170, 360));
 
+    jPanel3.setBackground(new java.awt.Color(0, 205, 203));
+    jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+    welcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+    welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
+    welcomeLabel.setText("Bienvenid@");
+    jPanel3.add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, -1));
+
+    cajeroEnTurno.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+    cajeroEnTurno.setForeground(new java.awt.Color(255, 255, 255));
+    jPanel3.add(cajeroEnTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 190, 50));
+    cajeroEnTurno.setText(cajero);
+
+    horaTurno.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+    horaTurno.setForeground(new java.awt.Color(102, 102, 102));
+    jPanel3.add(horaTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 420, 30));
+    if(turno.equals("Matutino")){
+        horaTurno.setText("De 7:00 a.m a las 3:00 p.m");
+    } else {
+        horaTurno.setText("De las 3:00 p.m a las 10:00 p.m");
+    }
+
     historialCortesButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceHistorial.png")));
     historialCortesButton.setFocusPainted(false);
     historialCortesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -902,7 +906,9 @@ private void cargarInventarioATabla() {
             historialCortesButtonActionPerformed(evt);
         }
     });
-    cortePanel.add(historialCortesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 40, 50, 50));
+    jPanel3.add(historialCortesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, 50, 50));
+
+    cortePanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 1200, 90));
 
     getContentPane().add(cortePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1280, 590));
     cortePanel.setVisible(false);
@@ -910,10 +916,21 @@ private void cargarInventarioATabla() {
     historialPanel.setBackground(new java.awt.Color(255, 255, 255));
     historialPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    labelEntradaProducto1.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-    labelEntradaProducto1.setForeground(new java.awt.Color(0, 0, 0));
+    eliminarVentasAll.setText("Eliminar todos los registros");
+    eliminarVentasAll.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            eliminarVentasAllActionPerformed(evt);
+        }
+    });
+    historialPanel.add(eliminarVentasAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 27, -1, 30));
+
+    labelEntradaProducto1.setBackground(new java.awt.Color(0, 205, 203));
+    labelEntradaProducto1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+    labelEntradaProducto1.setForeground(new java.awt.Color(255, 255, 255));
+    labelEntradaProducto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     labelEntradaProducto1.setText("Historial de compras");
-    historialPanel.add(labelEntradaProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 410, 40));
+    labelEntradaProducto1.setOpaque(true);
+    historialPanel.add(labelEntradaProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1220, 60));
 
     historialTable.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
@@ -928,15 +945,7 @@ private void cargarInventarioATabla() {
     ));
     jScrollPane4.setViewportView(historialTable);
 
-    historialPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 1150, 400));
-
-    eliminarVentasAll.setText("Eliminar todos los registros");
-    eliminarVentasAll.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            eliminarVentasAllActionPerformed(evt);
-        }
-    });
-    historialPanel.add(eliminarVentasAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, -1, -1));
+    historialPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 1150, 400));
 
     getContentPane().add(historialPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1280, 590));
     historialPanel.setVisible(false);
@@ -1646,6 +1655,7 @@ private void cargarInventarioATabla() {
     private javax.swing.JPanel inventarioPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -42,26 +42,38 @@ public class eliminarProducto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         eliminacionLabel = new javax.swing.JLabel();
+        advLabel = new javax.swing.JLabel();
         codProductoElimLabel = new javax.swing.JLabel();
         codProdEliminar = new javax.swing.JFormattedTextField();
         eliminarProdButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        eliminacionLabel.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-        eliminacionLabel.setForeground(new java.awt.Color(0, 0, 0));
+        eliminacionLabel.setBackground(new java.awt.Color(0, 205, 203));
+        eliminacionLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        eliminacionLabel.setForeground(new java.awt.Color(255, 255, 255));
+        eliminacionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         eliminacionLabel.setText("Eliminar Producto");
-        jPanel1.add(eliminacionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
+        eliminacionLabel.setOpaque(true);
+        jPanel1.add(eliminacionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 750, 40));
+
+        advLabel.setForeground(new java.awt.Color(102, 102, 102));
+        advLabel.setText("(El producto se eliminara totalmente de la base de datos)");
+        jPanel1.add(advLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, 20));
 
         codProductoElimLabel.setForeground(new java.awt.Color(0, 0, 0));
         codProductoElimLabel.setText("Ingresa el codigo del producto a eliminar:");
         jPanel1.add(codProductoElimLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, 40));
         jPanel1.add(codProdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 400, 40));
 
+        eliminarProdButton.setBackground(new java.awt.Color(65, 220, 127));
+        eliminarProdButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarProdButton.setForeground(new java.awt.Color(255, 255, 255));
         eliminarProdButton.setText("Eliminar");
         eliminarProdButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +163,7 @@ public class eliminarProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel advLabel;
     private javax.swing.JFormattedTextField codProdEliminar;
     private javax.swing.JLabel codProductoElimLabel;
     private javax.swing.JLabel eliminacionLabel;

@@ -50,6 +50,7 @@ public class preLobby extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
         setPreferredSize(new java.awt.Dimension(600, 400));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelInicio.setBackground(new java.awt.Color(255, 255, 255));
@@ -95,6 +96,7 @@ public class preLobby extends javax.swing.JFrame {
         panelInicio.add(turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 160, 30));
 
         empezarTurno.setBackground(new java.awt.Color(0, 153, 153));
+        empezarTurno.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         empezarTurno.setForeground(new java.awt.Color(255, 255, 255));
         empezarTurno.setText("Empezar Turno");
         empezarTurno.setBorder(null);
@@ -108,6 +110,7 @@ public class preLobby extends javax.swing.JFrame {
         panelInicio.add(empezarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 110, 30));
 
         cerrarButton.setBackground(new java.awt.Color(0, 153, 153));
+        cerrarButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cerrarButton.setForeground(new java.awt.Color(255, 255, 255));
         cerrarButton.setText("Cerrar");
         cerrarButton.setBorder(null);

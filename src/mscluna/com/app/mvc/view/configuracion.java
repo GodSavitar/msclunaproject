@@ -32,163 +32,210 @@ public class configuracion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        bgBase = new javax.swing.JPanel();
+        configLabel = new javax.swing.JLabel();
+        generalSelect = new javax.swing.JLabel();
+        admUsuariosButton = new javax.swing.JButton();
+        modificarUsuarios = new javax.swing.JButton();
+        personalizacionSelect = new javax.swing.JLabel();
+        generadorTicketsButton = new javax.swing.JButton();
+        notificacionesButton = new javax.swing.JButton();
+        accesoButton = new javax.swing.JButton();
+        baseDeDatosSelect = new javax.swing.JLabel();
+        copiaSeguridadButton = new javax.swing.JButton();
+        actualizacionesButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(600, 500));
         setMinimumSize(new java.awt.Dimension(600, 500));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(600, 500));
-        jPanel1.setMinimumSize(new java.awt.Dimension(600, 500));
-        jPanel1.setName(""); // NOI18N
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        bgBase.setBackground(new java.awt.Color(255, 255, 255));
+        bgBase.setMaximumSize(new java.awt.Dimension(600, 500));
+        bgBase.setMinimumSize(new java.awt.Dimension(600, 500));
+        bgBase.setName(""); // NOI18N
+        bgBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton6.setBackground(new java.awt.Color(65, 220, 127));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceModificarUser.png")));
-        jButton6.setText("Modificar Usuarios");
-        jButton6.setBorder(null);
-        jButton6.setBorderPainted(false);
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton6.setFocusPainted(false);
-        jButton6.setFocusable(false);
-        jButton6.setMaximumSize(new java.awt.Dimension(142, 27));
-        jButton6.setMinimumSize(new java.awt.Dimension(142, 27));
-        jButton6.setPreferredSize(new java.awt.Dimension(142, 27));
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 150, 40));
+        configLabel.setBackground(new java.awt.Color(0, 205, 203));
+        configLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        configLabel.setForeground(new java.awt.Color(255, 255, 255));
+        configLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        configLabel.setText("Configuración");
+        configLabel.setOpaque(true);
+        bgBase.add(configLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 540, 40));
 
-        jLabel8.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("General");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        generalSelect.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
+        generalSelect.setForeground(new java.awt.Color(102, 102, 102));
+        generalSelect.setText("General");
+        bgBase.add(generalSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        jButton7.setBackground(new java.awt.Color(65, 220, 127));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourcePermisosUser.png")));
-        jButton7.setText("Permisos");
-        jButton7.setBorder(null);
-        jButton7.setBorderPainted(false);
-        jButton7.setFocusPainted(false);
-        jButton7.setFocusable(false);
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 120, 40));
-
-        jLabel9.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("Personalización ");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
-
-        jButton8.setBackground(new java.awt.Color(65, 220, 127));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceNotificacion.png")));
-        jButton8.setText("Acceso");
-        jButton8.setBorder(null);
-        jButton8.setBorderPainted(false);
-        jButton8.setFocusPainted(false);
-        jButton8.setFocusable(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        admUsuariosButton.setBackground(new java.awt.Color(65, 220, 127));
+        admUsuariosButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        admUsuariosButton.setForeground(new java.awt.Color(255, 255, 255));
+        admUsuariosButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceAggUser.png")));
+        admUsuariosButton.setText("Administrar Usuarios");
+        admUsuariosButton.setBorder(null);
+        admUsuariosButton.setBorderPainted(false);
+        admUsuariosButton.setFocusPainted(false);
+        admUsuariosButton.setFocusable(false);
+        admUsuariosButton.setPreferredSize(new java.awt.Dimension(142, 27));
+        admUsuariosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                admUsuariosButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 130, 40));
+        bgBase.add(admUsuariosButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 150, 40));
 
-        jButton5.setBackground(new java.awt.Color(65, 220, 127));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceAggUser.png")));
-        jButton5.setText("Agregar Usuarios");
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setFocusPainted(false);
-        jButton5.setFocusable(false);
-        jButton5.setPreferredSize(new java.awt.Dimension(142, 27));
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 150, 40));
-
-        jLabel7.setBackground(new java.awt.Color(0, 205, 203));
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Configuración");
-        jLabel7.setOpaque(true);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 540, 40));
-
-        jButton9.setBackground(new java.awt.Color(65, 220, 127));
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceCopiaS.png")));
-        jButton9.setText("Copias de Seguridad");
-        jButton9.setBorder(null);
-        jButton9.setBorderPainted(false);
-        jButton9.setFocusPainted(false);
-        jButton9.setFocusable(false);
-        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 170, 40));
-
-        jLabel10.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel10.setText("Base de Datos");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
-
-        jButton10.setBackground(new java.awt.Color(65, 220, 127));
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceTicket.png")));
-        jButton10.setText("Generador de tickets");
-        jButton10.setBorder(null);
-        jButton10.setBorderPainted(false);
-        jButton10.setFocusPainted(false);
-        jButton10.setFocusable(false);
-        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 180, 40));
-
-        jButton11.setBackground(new java.awt.Color(65, 220, 127));
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceNotificacion.png")));
-        jButton11.setText("Notificaciones");
-        jButton11.setBorder(null);
-        jButton11.setBorderPainted(false);
-        jButton11.setFocusPainted(false);
-        jButton11.setFocusable(false);
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        modificarUsuarios.setBackground(new java.awt.Color(65, 220, 127));
+        modificarUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        modificarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        modificarUsuarios.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceModificarUser.png")));
+        modificarUsuarios.setText("Modificar Usuarios");
+        modificarUsuarios.setBorder(null);
+        modificarUsuarios.setBorderPainted(false);
+        modificarUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarUsuarios.setFocusPainted(false);
+        modificarUsuarios.setFocusable(false);
+        modificarUsuarios.setMaximumSize(new java.awt.Dimension(142, 27));
+        modificarUsuarios.setMinimumSize(new java.awt.Dimension(142, 27));
+        modificarUsuarios.setPreferredSize(new java.awt.Dimension(142, 27));
+        modificarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                modificarUsuariosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 130, 40));
+        bgBase.add(modificarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 150, 40));
+
+        personalizacionSelect.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
+        personalizacionSelect.setForeground(new java.awt.Color(102, 102, 102));
+        personalizacionSelect.setText("Personalización ");
+        bgBase.add(personalizacionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        generadorTicketsButton.setBackground(new java.awt.Color(65, 220, 127));
+        generadorTicketsButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        generadorTicketsButton.setForeground(new java.awt.Color(255, 255, 255));
+        generadorTicketsButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceTicket.png")));
+        generadorTicketsButton.setText("Generador de tickets");
+        generadorTicketsButton.setBorder(null);
+        generadorTicketsButton.setBorderPainted(false);
+        generadorTicketsButton.setFocusPainted(false);
+        generadorTicketsButton.setFocusable(false);
+        generadorTicketsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generadorTicketsButtonActionPerformed(evt);
+            }
+        });
+        bgBase.add(generadorTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 180, 40));
+
+        notificacionesButton.setBackground(new java.awt.Color(65, 220, 127));
+        notificacionesButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        notificacionesButton.setForeground(new java.awt.Color(255, 255, 255));
+        notificacionesButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceNotificacion.png")));
+        notificacionesButton.setText("Notificaciones");
+        notificacionesButton.setBorder(null);
+        notificacionesButton.setBorderPainted(false);
+        notificacionesButton.setFocusPainted(false);
+        notificacionesButton.setFocusable(false);
+        notificacionesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notificacionesButtonActionPerformed(evt);
+            }
+        });
+        bgBase.add(notificacionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 130, 40));
+
+        accesoButton.setBackground(new java.awt.Color(65, 220, 127));
+        accesoButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        accesoButton.setForeground(new java.awt.Color(255, 255, 255));
+        accesoButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceNotificacion.png")));
+        accesoButton.setText("Acceso");
+        accesoButton.setBorder(null);
+        accesoButton.setBorderPainted(false);
+        accesoButton.setFocusPainted(false);
+        accesoButton.setFocusable(false);
+        accesoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accesoButtonActionPerformed(evt);
+            }
+        });
+        bgBase.add(accesoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 130, 40));
+
+        baseDeDatosSelect.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
+        baseDeDatosSelect.setForeground(new java.awt.Color(102, 102, 102));
+        baseDeDatosSelect.setText("Base de Datos");
+        bgBase.add(baseDeDatosSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        copiaSeguridadButton.setBackground(new java.awt.Color(65, 220, 127));
+        copiaSeguridadButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        copiaSeguridadButton.setForeground(new java.awt.Color(255, 255, 255));
+        copiaSeguridadButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceCopiaS.png")));
+        copiaSeguridadButton.setText("Copias de Seguridad");
+        copiaSeguridadButton.setBorder(null);
+        copiaSeguridadButton.setBorderPainted(false);
+        copiaSeguridadButton.setFocusPainted(false);
+        copiaSeguridadButton.setFocusable(false);
+        copiaSeguridadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copiaSeguridadButtonActionPerformed(evt);
+            }
+        });
+        bgBase.add(copiaSeguridadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 170, 40));
+
+        actualizacionesButton.setBackground(new java.awt.Color(65, 220, 127));
+        actualizacionesButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        actualizacionesButton.setForeground(new java.awt.Color(255, 255, 255));
+        actualizacionesButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourcePermisosUser.png")));
+        actualizacionesButton.setText("Actualizaciones");
+        actualizacionesButton.setBorder(null);
+        actualizacionesButton.setBorderPainted(false);
+        actualizacionesButton.setFocusPainted(false);
+        actualizacionesButton.setFocusable(false);
+        actualizacionesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizacionesButtonActionPerformed(evt);
+            }
+        });
+        bgBase.add(actualizacionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 120, 40));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 560, 340));
+        bgBase.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 560, 340));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
+        getContentPane().add(bgBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void accesoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accesoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_accesoButtonActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void notificacionesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacionesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_notificacionesButtonActionPerformed
+
+    private void admUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admUsuariosButtonActionPerformed
+        admUsuarios usus = new admUsuarios();
+        usus.setVisible(true);
+    }//GEN-LAST:event_admUsuariosButtonActionPerformed
+
+    private void modificarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarUsuariosActionPerformed
+
+    private void generadorTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generadorTicketsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generadorTicketsButtonActionPerformed
+
+    private void copiaSeguridadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copiaSeguridadButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_copiaSeguridadButtonActionPerformed
+
+    private void actualizacionesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizacionesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_actualizacionesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,18 +263,18 @@ public class configuracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton accesoButton;
+    private javax.swing.JButton actualizacionesButton;
+    private javax.swing.JButton admUsuariosButton;
+    private javax.swing.JLabel baseDeDatosSelect;
+    private javax.swing.JPanel bgBase;
+    private javax.swing.JLabel configLabel;
+    private javax.swing.JButton copiaSeguridadButton;
+    private javax.swing.JButton generadorTicketsButton;
+    private javax.swing.JLabel generalSelect;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton modificarUsuarios;
+    private javax.swing.JButton notificacionesButton;
+    private javax.swing.JLabel personalizacionSelect;
     // End of variables declaration//GEN-END:variables
 }

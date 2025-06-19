@@ -75,8 +75,12 @@ public class buscarProductos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        buscarProductoLabelVenta.setForeground(new java.awt.Color(0, 0, 0));
+        buscarProductoLabelVenta.setBackground(new java.awt.Color(0, 205, 203));
+        buscarProductoLabelVenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buscarProductoLabelVenta.setForeground(new java.awt.Color(255, 255, 255));
+        buscarProductoLabelVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         buscarProductoLabelVenta.setText("Buscar Producto");
+        buscarProductoLabelVenta.setOpaque(true);
 
         nombre.setBackground(new java.awt.Color(255, 255, 255));
         nombre.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,7 +96,12 @@ public class buscarProductos extends javax.swing.JFrame {
             }
         });
 
+        buscarButton.setBackground(new java.awt.Color(65, 220, 127));
+        buscarButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
+        buscarButton.setFocusPainted(false);
+        buscarButton.setFocusable(false);
         buscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarButtonActionPerformed(evt);
@@ -102,7 +111,12 @@ public class buscarProductos extends javax.swing.JFrame {
 
         nombre.add(mostrarOpcionesNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 65, 323, 30));
 
+        enviarOpcionVentas.setBackground(new java.awt.Color(65, 220, 127));
+        enviarOpcionVentas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        enviarOpcionVentas.setForeground(new java.awt.Color(255, 255, 255));
         enviarOpcionVentas.setText("Enviar");
+        enviarOpcionVentas.setFocusPainted(false);
+        enviarOpcionVentas.setFocusable(false);
         enviarOpcionVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enviarOpcionVentasActionPerformed(evt);
@@ -131,7 +145,12 @@ public class buscarProductos extends javax.swing.JFrame {
             }
         });
 
+        buscarButton2.setBackground(new java.awt.Color(65, 220, 127));
+        buscarButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buscarButton2.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton2.setText("Buscar");
+        buscarButton2.setFocusPainted(false);
+        buscarButton2.setFocusable(false);
         buscarButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarButton2ActionPerformed(evt);
@@ -141,13 +160,18 @@ public class buscarProductos extends javax.swing.JFrame {
 
         granel.add(mostrarOpcionesGranel, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 65, 323, -1));
 
+        enviarOpcionVentas2.setBackground(new java.awt.Color(65, 220, 127));
+        enviarOpcionVentas2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        enviarOpcionVentas2.setForeground(new java.awt.Color(255, 255, 255));
         enviarOpcionVentas2.setText("Enviar");
+        enviarOpcionVentas2.setFocusPainted(false);
+        enviarOpcionVentas2.setFocusable(false);
         enviarOpcionVentas2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enviarOpcionVentas2ActionPerformed(evt);
             }
         });
-        granel.add(enviarOpcionVentas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+        granel.add(enviarOpcionVentas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, -1, -1));
         granel.add(cantidadEnKg, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 110, 30));
         granel.add(cantidadEnPesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 110, 30));
 
@@ -167,13 +191,18 @@ public class buscarProductos extends javax.swing.JFrame {
         adv2.setText("Ingresar precio para calcular kg");
         granel.add(adv2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
 
+        calcularGramosPesos.setBackground(new java.awt.Color(65, 220, 127));
+        calcularGramosPesos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        calcularGramosPesos.setForeground(new java.awt.Color(255, 255, 255));
         calcularGramosPesos.setText("Calcular");
+        calcularGramosPesos.setFocusPainted(false);
+        calcularGramosPesos.setFocusable(false);
         calcularGramosPesos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcularGramosPesosActionPerformed(evt);
             }
         });
-        granel.add(calcularGramosPesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        granel.add(calcularGramosPesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
         granel.add(mostrarPesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 180, 40));
         granel.add(mostrarKg, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 180, 40));
 
@@ -183,19 +212,19 @@ public class buscarProductos extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(buscarProductoLabelVenta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(buscarProductoLabelVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buscarProductoLabelVenta)
+                .addComponent(buscarProductoLabelVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

@@ -60,8 +60,8 @@ public class editarProductoGFV extends javax.swing.JFrame {
         existenciasIngresarGFV = new javax.swing.JLabel();
         categoriaIngresarGFV = new javax.swing.JLabel();
         minimoPorKgGFV = new javax.swing.JLabel();
-        jSeparator1GFV = new javax.swing.JSeparator();
         descModGFV1 = new javax.swing.JTextField();
+        jSeparator1GFV = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -69,16 +69,26 @@ public class editarProductoGFV extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        modificacionLabelGFV.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-        modificacionLabelGFV.setForeground(new java.awt.Color(0, 0, 0));
+        modificacionLabelGFV.setBackground(new java.awt.Color(0, 205, 203));
+        modificacionLabelGFV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        modificacionLabelGFV.setForeground(new java.awt.Color(255, 255, 255));
+        modificacionLabelGFV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         modificacionLabelGFV.setText("Modificar/Editar Producto");
-        jPanel1.add(modificacionLabelGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        modificacionLabelGFV.setOpaque(true);
+        jPanel1.add(modificacionLabelGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 40));
 
         codProductoEditLabelGFV.setForeground(new java.awt.Color(0, 0, 0));
         codProductoEditLabelGFV.setText("Ingresa el codigo del producto a editar:");
         jPanel1.add(codProductoEditLabelGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 102, -1, -1));
+
+        codProdEditarGFV.setBackground(new java.awt.Color(255, 255, 255));
+        codProdEditarGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        codProdEditarGFV.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(codProdEditarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 340, 40));
 
+        ingresoProductoGFV.setBackground(new java.awt.Color(65, 220, 127));
+        ingresoProductoGFV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ingresoProductoGFV.setForeground(new java.awt.Color(255, 255, 255));
         ingresoProductoGFV.setText("Enviar");
         ingresoProductoGFV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,12 +106,35 @@ public class editarProductoGFV extends javax.swing.JFrame {
 
         productoSeleccionadoGFV.setForeground(new java.awt.Color(51, 255, 51));
         jPanel1.add(productoSeleccionadoGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 310, 20));
+
+        categoriaModGFV.setBackground(new java.awt.Color(255, 255, 255));
+        categoriaModGFV.setForeground(new java.awt.Color(0, 0, 0));
+        categoriaModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.add(categoriaModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 450, 40));
+
+        precioUnitModGFV.setBackground(new java.awt.Color(255, 255, 255));
+        precioUnitModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        precioUnitModGFV.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(precioUnitModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 450, 40));
+
+        cantidadpKgModGFV.setBackground(new java.awt.Color(255, 255, 255));
+        cantidadpKgModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cantidadpKgModGFV.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(cantidadpKgModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 450, 40));
+
+        precioPKgGFV.setBackground(new java.awt.Color(255, 255, 255));
+        precioPKgGFV.setForeground(new java.awt.Color(0, 0, 0));
+        precioPKgGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.add(precioPKgGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 450, 40));
+
+        cantidadMinimapKgModGFV.setBackground(new java.awt.Color(255, 255, 255));
+        cantidadMinimapKgModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cantidadMinimapKgModGFV.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(cantidadMinimapKgModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 450, 40));
 
+        aceptarModificacionGFV.setBackground(new java.awt.Color(65, 220, 127));
+        aceptarModificacionGFV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        aceptarModificacionGFV.setForeground(new java.awt.Color(255, 255, 255));
         aceptarModificacionGFV.setText("Modificar");
         aceptarModificacionGFV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,9 +167,13 @@ public class editarProductoGFV extends javax.swing.JFrame {
         minimoPorKgGFV.setText("Cantidad minima de producto p/Kg:");
         jPanel1.add(minimoPorKgGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, 40));
 
+        descModGFV1.setBackground(new java.awt.Color(255, 255, 255));
+        descModGFV1.setForeground(new java.awt.Color(0, 0, 0));
+        descModGFV1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel1.add(descModGFV1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 450, 40));
+
         jSeparator1GFV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jSeparator1GFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 810, 510));
-        jPanel1.add(descModGFV1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 450, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 650));
 

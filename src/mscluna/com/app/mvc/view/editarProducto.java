@@ -73,8 +73,15 @@ public class editarProducto extends javax.swing.JFrame {
         codProductoEditLabel.setForeground(new java.awt.Color(0, 0, 0));
         codProductoEditLabel.setText("Ingresa el codigo del producto a editar:");
         jPanel1.add(codProductoEditLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 102, -1, -1));
+
+        codProdEditar.setBackground(new java.awt.Color(255, 255, 255));
+        codProdEditar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        codProdEditar.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(codProdEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 340, 40));
 
+        ingresoProductoMod.setBackground(new java.awt.Color(65, 220, 127));
+        ingresoProductoMod.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ingresoProductoMod.setForeground(new java.awt.Color(255, 255, 255));
         ingresoProductoMod.setText("Enviar");
         ingresoProductoMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,10 +90,13 @@ public class editarProducto extends javax.swing.JFrame {
         });
         jPanel1.add(ingresoProductoMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, -1, 40));
 
-        modificacionLabel.setFont(new java.awt.Font("SimSun", 0, 36)); // NOI18N
-        modificacionLabel.setForeground(new java.awt.Color(0, 0, 0));
+        modificacionLabel.setBackground(new java.awt.Color(0, 205, 203));
+        modificacionLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        modificacionLabel.setForeground(new java.awt.Color(255, 255, 255));
+        modificacionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         modificacionLabel.setText("Modificar/Editar Producto");
-        jPanel1.add(modificacionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        modificacionLabel.setOpaque(true);
+        jPanel1.add(modificacionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 40));
 
         instruccionLabel.setForeground(new java.awt.Color(0, 0, 0));
         instruccionLabel.setText("Producto a modificar:");
@@ -98,38 +108,69 @@ public class editarProducto extends javax.swing.JFrame {
         modificarDescLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarDescLabel.setText("Modificar descripcion:");
         jPanel1.add(modificarDescLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, 30));
+
+        descMod.setBackground(new java.awt.Color(255, 255, 255));
+        descMod.setForeground(new java.awt.Color(0, 0, 0));
+        descMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.add(descMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 450, 40));
 
         modificarPrecioULabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarPrecioULabel.setText("Modificar precio unitario:");
         jPanel1.add(modificarPrecioULabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 140, 40));
+
+        precioUnitMod.setBackground(new java.awt.Color(255, 255, 255));
+        precioUnitMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        precioUnitMod.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(precioUnitMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 450, 40));
 
         modificarCantidadLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarCantidadLabel.setText("Modificar existencia (cantidad):");
         jPanel1.add(modificarCantidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, 30));
+
+        cantidadMod.setBackground(new java.awt.Color(255, 255, 255));
+        cantidadMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cantidadMod.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(cantidadMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 450, 40));
 
         modificarCategoriaLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarCategoriaLabel.setText("Modificar categoria:");
         jPanel1.add(modificarCategoriaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, 30));
+
+        categoriaMod.setBackground(new java.awt.Color(255, 255, 255));
+        categoriaMod.setForeground(new java.awt.Color(0, 0, 0));
+        categoriaMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.add(categoriaMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 450, 40));
 
         modificarPrecioDescuentoLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarPrecioDescuentoLabel.setText("Modificar precio unitario (Sabados):");
         jPanel1.add(modificarPrecioDescuentoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 200, 40));
+
+        precioDescuentoMod.setBackground(new java.awt.Color(255, 255, 255));
+        precioDescuentoMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        precioDescuentoMod.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(precioDescuentoMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 450, 40));
 
         modificarImporteLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarImporteLabel.setText("Modificar importe:");
         jPanel1.add(modificarImporteLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, 40));
+
+        importeMod.setBackground(new java.awt.Color(255, 255, 255));
+        importeMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        importeMod.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(importeMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 450, 40));
 
         asd.setForeground(new java.awt.Color(0, 0, 0));
         asd.setText("Modificar minimo: ");
         jPanel1.add(asd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 516, 110, 30));
+
+        minimumMod.setBackground(new java.awt.Color(255, 255, 255));
+        minimumMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        minimumMod.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(minimumMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 450, 40));
 
+        aceptarModificacion.setBackground(new java.awt.Color(65, 220, 127));
+        aceptarModificacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        aceptarModificacion.setForeground(new java.awt.Color(255, 255, 255));
         aceptarModificacion.setText("Modificar");
         aceptarModificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
