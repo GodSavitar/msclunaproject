@@ -47,7 +47,6 @@ public class login extends javax.swing.JFrame {
         userfield = new javax.swing.JTextField();
         passfield = new javax.swing.JPasswordField();
         iconPass = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,14 +142,6 @@ public class login extends javax.swing.JFrame {
         iconPass.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/passIconPNG.png")));
         bgpanel.add(iconPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 300, 40, 36));
 
-        jButton1.setText("asd");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        bgpanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, -1, -1));
-
         getContentPane().add(bgpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         pack();
@@ -227,11 +218,6 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sendButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        historialCortes hd = new historialCortes();
-        hd.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -275,7 +261,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton eyeButton;
     private javax.swing.JLabel iconPass;
     private javax.swing.JLabel iconUser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel mscMessage1;
     private javax.swing.JLabel mscMessage2;
     private javax.swing.JPasswordField passfield;

@@ -5,11 +5,7 @@
 package mscluna.com.app.mvc.view;
 
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import mscluna.com.app.mvc.model.Usuario;
-import mscluna.com.app.mvc.model.UsuarioDAO;
-import java.sql.SQLException;
-import java.sql.Connection;
+
 /**
  *
  * @author luiis
@@ -451,74 +447,7 @@ public class admUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarCajeroButtonActionPerformed
 
     private void enviarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarUsuarioActionPerformed
-        String username = nuevoUsuarioUser.getText().trim();
-        String password = new String(nuevoUsuarioPass.getPassword()).trim();
-        String nombre = nuevoUsuarioNombre.getText().trim();
 
-        if (username.isEmpty() || password.isEmpty() || nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos obligatorios deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String passwordHash = password;
-
-        Usuario nuevoUsuario = new Usuario();
-        nuevoUsuario.setUsername(username);
-        nuevoUsuario.setPasswordHash(passwordHash);
-        nuevoUsuario.setNombre(nombre);
-        // Aquí setea los permisos usando los checkboxes
-        nuevoUsuario.setUsarProductosComunes(permVentasProductosComunes.isSelected());
-        nuevoUsuario.setAplicarDescuentos(permAplicarDescuentos.isSelected());
-        nuevoUsuario.setRevisarHistorialVentas(permRevisarHistorialV.isSelected());
-        nuevoUsuario.setCobrarTicket(permCobrarUnTicket.isSelected());
-        nuevoUsuario.setEliminarArticulosVenta(permEliminarArtVenta.isSelected());
-        nuevoUsuario.setUsarBuscadorProductos(permUsarBuscadorP.isSelected());
-        nuevoUsuario.setUsarVarios(permUsarVarios.isSelected());
-        nuevoUsuario.setAvalarProductos(permFiarProductos.isSelected());
-        nuevoUsuario.setManejarVariosTickets(jCheckBox1.isSelected());
-        nuevoUsuario.setAdmClientesAvalados(jCheckBox2.isSelected());
-        nuevoUsuario.setAnadirProductos(jCheckBox3.isSelected());
-        nuevoUsuario.setEliminarProductos(jCheckBox4.isSelected());
-        nuevoUsuario.setEditarProductos(jCheckBox5.isSelected());
-        nuevoUsuario.setVerInventario(jCheckBox6.isSelected());
-        nuevoUsuario.setAdministrador(jCheckBox7.isSelected());
-
-        try {
-            Connection conn = mscluna.com.app.mvc.controller.ConexionBD.getConexion("admin", "adminpassword", "nube_database_ta");
-            UsuarioDAO usuarioDao = new UsuarioDAO(conn);
-
-            boolean exito = usuarioDao.insertarUsuario(nuevoUsuario);
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Usuario añadido correctamente.");
-
-                // No necesitas llamar a preLobby.actualizarCajeros()
-
-                nuevoUsuarioUser.setText("");
-                nuevoUsuarioPass.setText("");
-                nuevoUsuarioNombre.setText("");
-                permVentasProductosComunes.setSelected(false);
-                permAplicarDescuentos.setSelected(false);
-                permRevisarHistorialV.setSelected(false);
-                permCobrarUnTicket.setSelected(false);
-                permEliminarArtVenta.setSelected(false);
-                permUsarBuscadorP.setSelected(false);
-                permUsarVarios.setSelected(false);
-                permFiarProductos.setSelected(false);
-                jCheckBox1.setSelected(false);
-                jCheckBox2.setSelected(false);
-                jCheckBox3.setSelected(false);
-                jCheckBox4.setSelected(false);
-                jCheckBox5.setSelected(false);
-                jCheckBox6.setSelected(false);
-                jCheckBox7.setSelected(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo añadir el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error de base de datos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-        }
     }//GEN-LAST:event_enviarUsuarioActionPerformed
 
     /**
