@@ -1213,7 +1213,6 @@ private void cargarInventarioATabla() {
             JOptionPane.showMessageDialog(this, "ID de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         codProducto.setText("");
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<< AGREGA ESTA LÍNEA AL FINAL >>>>>>>>>>>>>>>>>>>>>>>>>>
         ventasManager.calcularTotal();
     }//GEN-LAST:event_agregarProductoButtonActionPerformed
 

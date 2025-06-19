@@ -5,7 +5,11 @@
 package mscluna.com.app.mvc.view;
 
 import javax.swing.ImageIcon;
-
+import javax.swing.JOptionPane;
+import mscluna.com.app.mvc.model.Usuario;
+import mscluna.com.app.mvc.model.UsuarioDAO;
+import java.sql.SQLException;
+import java.sql.Connection;
 /**
  *
  * @author luiis
@@ -13,7 +17,6 @@ import javax.swing.ImageIcon;
 public class admUsuarios extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(admUsuarios.class.getName());
-
     /**
      * Creates new form agregarUsuario
      */
@@ -68,6 +71,7 @@ public class admUsuarios extends javax.swing.JFrame {
         jCheckBox6 = new javax.swing.JCheckBox();
         permisosOtros = new javax.swing.JPanel();
         jCheckBox7 = new javax.swing.JCheckBox();
+        enviarUsuario = new javax.swing.JButton();
         buscarCajeroButton = new javax.swing.JButton();
         panelEliminarCajero = new javax.swing.JPanel();
         eliminarCajero = new javax.swing.JButton();
@@ -134,18 +138,18 @@ public class admUsuarios extends javax.swing.JFrame {
 
         nuevoUserLabel.setForeground(new java.awt.Color(0, 0, 0));
         nuevoUserLabel.setText("Nombre de usuario:");
-        panelNuevoCajero.add(nuevoUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
+        panelNuevoCajero.add(nuevoUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
 
         nombreCompletoLabel.setForeground(new java.awt.Color(0, 0, 0));
         nombreCompletoLabel.setText("Nombre completo:");
-        panelNuevoCajero.add(nombreCompletoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
+        panelNuevoCajero.add(nombreCompletoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 30));
 
         passLabel.setForeground(new java.awt.Color(0, 0, 0));
         passLabel.setText("Contraseña:");
-        panelNuevoCajero.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 136, 80, 20));
-        panelNuevoCajero.add(nuevoUsuarioUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 56, 210, 30));
-        panelNuevoCajero.add(nuevoUsuarioNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 210, 30));
-        panelNuevoCajero.add(nuevoUsuarioPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 210, 30));
+        panelNuevoCajero.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 80, 30));
+        panelNuevoCajero.add(nuevoUsuarioUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 210, 30));
+        panelNuevoCajero.add(nuevoUsuarioNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 210, 30));
+        panelNuevoCajero.add(nuevoUsuarioPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 210, 30));
 
         permisosVentas.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -220,7 +224,7 @@ public class admUsuarios extends javax.swing.JFrame {
                 .addComponent(permUsarVarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(permFiarProductos)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         permisosTabbed.addTab("Ventas", permisosVentas);
@@ -244,7 +248,7 @@ public class admUsuarios extends javax.swing.JFrame {
             .addGroup(permisosClientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jCheckBox2)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         permisosTabbed.addTab("Clientes", permisosClientes);
@@ -281,7 +285,7 @@ public class admUsuarios extends javax.swing.JFrame {
                 .addComponent(jCheckBox4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox5)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         permisosTabbed.addTab("Productos", permisosProductos);
@@ -305,7 +309,7 @@ public class admUsuarios extends javax.swing.JFrame {
             .addGroup(permisosInventarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jCheckBox6)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         permisosTabbed.addTab("Inventario", permisosInventario);
@@ -329,12 +333,23 @@ public class admUsuarios extends javax.swing.JFrame {
             .addGroup(permisosOtrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jCheckBox7)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         permisosTabbed.addTab("Otros", permisosOtros);
 
-        panelNuevoCajero.add(permisosTabbed, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 400, 290));
+        panelNuevoCajero.add(permisosTabbed, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 400, 260));
+
+        enviarUsuario.setBackground(new java.awt.Color(65, 220, 127));
+        enviarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        enviarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        enviarUsuario.setText("Add");
+        enviarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarUsuarioActionPerformed(evt);
+            }
+        });
+        panelNuevoCajero.add(enviarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
 
         buscarCajeroButton.setBackground(new java.awt.Color(65, 220, 127));
         buscarCajeroButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -399,10 +414,10 @@ public class admUsuarios extends javax.swing.JFrame {
                     .addComponent(eliminarCajeroButton)
                     .addComponent(buscarCajeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelNuevoCajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addGap(31, 31, 31))
+                .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelNuevoCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgBaseLayout.createSequentialGroup()
                     .addContainerGap(92, Short.MAX_VALUE)
@@ -434,6 +449,77 @@ public class admUsuarios extends javax.swing.JFrame {
         panelNuevoCajero.setVisible(false);
         panelEliminarCajero.setVisible(true);
     }//GEN-LAST:event_eliminarCajeroButtonActionPerformed
+
+    private void enviarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarUsuarioActionPerformed
+        String username = nuevoUsuarioUser.getText().trim();
+        String password = new String(nuevoUsuarioPass.getPassword()).trim();
+        String nombre = nuevoUsuarioNombre.getText().trim();
+
+        if (username.isEmpty() || password.isEmpty() || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos obligatorios deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String passwordHash = password;
+
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setUsername(username);
+        nuevoUsuario.setPasswordHash(passwordHash);
+        nuevoUsuario.setNombre(nombre);
+        // Aquí setea los permisos usando los checkboxes
+        nuevoUsuario.setUsarProductosComunes(permVentasProductosComunes.isSelected());
+        nuevoUsuario.setAplicarDescuentos(permAplicarDescuentos.isSelected());
+        nuevoUsuario.setRevisarHistorialVentas(permRevisarHistorialV.isSelected());
+        nuevoUsuario.setCobrarTicket(permCobrarUnTicket.isSelected());
+        nuevoUsuario.setEliminarArticulosVenta(permEliminarArtVenta.isSelected());
+        nuevoUsuario.setUsarBuscadorProductos(permUsarBuscadorP.isSelected());
+        nuevoUsuario.setUsarVarios(permUsarVarios.isSelected());
+        nuevoUsuario.setAvalarProductos(permFiarProductos.isSelected());
+        nuevoUsuario.setManejarVariosTickets(jCheckBox1.isSelected());
+        nuevoUsuario.setAdmClientesAvalados(jCheckBox2.isSelected());
+        nuevoUsuario.setAnadirProductos(jCheckBox3.isSelected());
+        nuevoUsuario.setEliminarProductos(jCheckBox4.isSelected());
+        nuevoUsuario.setEditarProductos(jCheckBox5.isSelected());
+        nuevoUsuario.setVerInventario(jCheckBox6.isSelected());
+        nuevoUsuario.setAdministrador(jCheckBox7.isSelected());
+
+        try {
+            Connection conn = mscluna.com.app.mvc.controller.ConexionBD.getConexion("admin", "adminpassword", "nube_database_ta");
+            UsuarioDAO usuarioDao = new UsuarioDAO(conn);
+
+            boolean exito = usuarioDao.insertarUsuario(nuevoUsuario);
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Usuario añadido correctamente.");
+
+                // No necesitas llamar a preLobby.actualizarCajeros()
+
+                nuevoUsuarioUser.setText("");
+                nuevoUsuarioPass.setText("");
+                nuevoUsuarioNombre.setText("");
+                permVentasProductosComunes.setSelected(false);
+                permAplicarDescuentos.setSelected(false);
+                permRevisarHistorialV.setSelected(false);
+                permCobrarUnTicket.setSelected(false);
+                permEliminarArtVenta.setSelected(false);
+                permUsarBuscadorP.setSelected(false);
+                permUsarVarios.setSelected(false);
+                permFiarProductos.setSelected(false);
+                jCheckBox1.setSelected(false);
+                jCheckBox2.setSelected(false);
+                jCheckBox3.setSelected(false);
+                jCheckBox4.setSelected(false);
+                jCheckBox5.setSelected(false);
+                jCheckBox6.setSelected(false);
+                jCheckBox7.setSelected(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo añadir el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error de base de datos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_enviarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,6 +554,7 @@ public class admUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton eliminarCajero;
     private javax.swing.JButton eliminarCajeroButton;
     private javax.swing.JLabel eliminarCajeroLabel;
+    private javax.swing.JButton enviarUsuario;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;

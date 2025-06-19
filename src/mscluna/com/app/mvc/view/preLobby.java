@@ -5,6 +5,11 @@
 package mscluna.com.app.mvc.view;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import mscluna.com.app.mvc.model.UsuarioDAO;
+import java.sql.Connection;
+import java.sql.SQLException;
+import mscluna.com.app.mvc.controller.ConexionBD;
 
 /**
  *
@@ -71,7 +76,7 @@ public class preLobby extends javax.swing.JFrame {
 
         seleccionarCajero.setBackground(new java.awt.Color(255, 255, 255));
         seleccionarCajero.setForeground(new java.awt.Color(0, 0, 0));
-        seleccionarCajero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin" }));
+        seleccionarCajero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cajero1" }));
         panelInicio.add(seleccionarCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 160, 30));
 
         dineroEnCajaLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -155,11 +160,40 @@ public class preLobby extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void actualizarCajeros() {
+    try {
+        Connection conn = mscluna.com.app.mvc.controller.ConexionBD.getConexion("admin", "adminpassword", "nube_database_ta");
+        String sql = "SELECT username FROM usuarios";
+        java.sql.PreparedStatement stmt = conn.prepareStatement(sql);
+        java.sql.ResultSet rs = stmt.executeQuery();
 
+        // Ahora seleccionaCajero es de instancia
+        seleccionarCajero.removeAllItems();
+        while (rs.next()) {
+            seleccionarCajero.addItem(rs.getString("username"));
+        }
+
+        conn.close();
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error actualizando cajeros: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
     private void empezarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empezarTurnoActionPerformed
-    lobby golobby = new lobby(getCajeroSeleccionado(), getTurno(), getDineroC());
-    golobby.setVisible(true);
-    this.dispose();
+        String usuario = seleccionarCajero.getSelectedItem().toString();
+        String contrasena = new String(contraUser.getPassword()).trim();
+
+        Connection conn = ConexionBD.getConexion(usuario, contrasena, "nube_database_ta");
+        if (conn != null) {
+            // Acceso concedido: abrir lobby
+            lobby ventanaLobby = new lobby(usuario,getTurno(), getDineroC());
+            ventanaLobby.setVisible(true);
+            this.dispose();
+            try { conn.close(); } catch (SQLException e) { }
+        } else {
+            // Acceso denegado
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña de base de datos incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_empezarTurnoActionPerformed
 
     private void cerrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarButtonActionPerformed

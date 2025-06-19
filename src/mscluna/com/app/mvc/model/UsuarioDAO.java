@@ -19,7 +19,21 @@ public class UsuarioDAO {
     public UsuarioDAO(Connection connection) {
         this.connection = connection;
     }
-
+public boolean validarUsuario(String username, String password) {
+    try {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE username = ? AND password_hash = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, username);
+        ps.setString(2, password); // OJO: aquí deberías hacer hash si guardas hash
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
     // Insertar un nuevo usuario
     public boolean insertarUsuario(Usuario usuario) throws SQLException {
         String sql = "INSERT INTO usuarios (username, password_hash, nombre," +
