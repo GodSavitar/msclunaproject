@@ -3,23 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package mscluna.com.app.mvc.view;
-
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.*;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import mscluna.com.app.mvc.controller.ConexionBD;
+import mscluna.com.app.mvc.controller.Sesion;
 
 /**
  *
  * @author luiis
  */
 public class admUsuarios extends javax.swing.JFrame {
-    
+    private preLobby ventanaPreLobby;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(admUsuarios.class.getName());
     /**
      * Creates new form agregarUsuario
      */
-    public admUsuarios() {
+    public admUsuarios(preLobby ventanaPreLobby) {
+        this.ventanaPreLobby = ventanaPreLobby;
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        cargarUsuariosEnTabla();
     }
 
     /**
@@ -355,7 +363,15 @@ public class admUsuarios extends javax.swing.JFrame {
         panelEliminarCajero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelEliminarCajero.setVisible(false);
 
+        eliminarCajero.setBackground(new java.awt.Color(65, 220, 127));
+        eliminarCajero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarCajero.setForeground(new java.awt.Color(255, 255, 255));
         eliminarCajero.setText("Eliminar");
+        eliminarCajero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarCajeroActionPerformed(evt);
+            }
+        });
         panelEliminarCajero.add(eliminarCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
         eliminarCajeroLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -404,11 +420,12 @@ public class admUsuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(administrarUsuariosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usuarioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nuevoCajeroButton)
-                    .addComponent(eliminarCajeroButton)
-                    .addComponent(buscarCajeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buscarCajeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(usuarioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nuevoCajeroButton)
+                        .addComponent(eliminarCajeroButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelNuevoCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,7 +451,54 @@ public class admUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        public void cargarUsuariosEnTabla() {
+        // Definir el modelo de la tabla con las columnas que quieres
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
+            new Object[]{"ID", "Usuario", "Nombre"}, 0
+        );
+        try (Connection conn = ConexionBD.getConexion(
+                Sesion.getUsuario(),
+                Sesion.getContrasena(),
+                Sesion.getBaseDatos())) {
+            String sql = "SELECT id, usuario, nombre_completo FROM usuarios";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usuario = rs.getString("usuario");
+                String nombre = rs.getString("nombre_completo");
+                modelo.addRow(new Object[]{id, usuario, nombre});
+            }
+            usuariosTable.setModel(modelo);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error cargando usuarios: " + e.getMessage());
+        }
+    }
+        
+public void cargarCajerosEliminar() {
+    cajeroComboBoxElim.removeAllItems();
+    String usuarioActualPreLobby = ventanaPreLobby != null ? ventanaPreLobby.getCajeroSeleccionado() : null;
+    try (Connection conn = ConexionBD.getConexion(
+            Sesion.getUsuario(),
+            Sesion.getContrasena(),
+            Sesion.getBaseDatos())) {
+
+        String sql = "SELECT usuario FROM usuarios";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String usuario = rs.getString("usuario");
+            if (usuarioActualPreLobby == null || !usuario.equals(usuarioActualPreLobby)) {
+                cajeroComboBoxElim.addItem(usuario);
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error cargando usuarios: " + e.getMessage());
+    }
+}
+    
     private void nuevoCajeroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoCajeroButtonActionPerformed
         panelEliminarCajero.setVisible(false);
         panelNuevoCajero.setVisible(true);
@@ -444,36 +508,115 @@ public class admUsuarios extends javax.swing.JFrame {
     private void eliminarCajeroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCajeroButtonActionPerformed
         panelNuevoCajero.setVisible(false);
         panelEliminarCajero.setVisible(true);
+        cargarCajerosEliminar();
     }//GEN-LAST:event_eliminarCajeroButtonActionPerformed
 
     private void enviarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarUsuarioActionPerformed
 
+    String usuario = nuevoUsuarioUser.getText();
+    String nombreCompleto = nuevoUsuarioNombre.getText();
+    String contrasena = new String(nuevoUsuarioPass.getPassword());
+
+    boolean permisoUtilizarProductosComunes = permVentasProductosComunes.isSelected();
+    boolean permisoAplicarDescuentos = permAplicarDescuentos.isSelected();
+    boolean permisoRevisarHistorialVentas = permRevisarHistorialV.isSelected();
+    boolean permisoCobrarTicket = permCobrarUnTicket.isSelected();
+    boolean permisoEliminarArtVenta = permEliminarArtVenta.isSelected();
+    boolean permisoUsarBuscadorProductos = permUsarBuscadorP.isSelected();
+    boolean permisoUsarVarios = permUsarVarios.isSelected();
+    boolean permisoAvalarProductos = permFiarProductos.isSelected();
+    boolean permisoManejarVariosTickets = jCheckBox1.isSelected();
+    boolean permisoAdmClientesAvalados = jCheckBox2.isSelected();
+    boolean permisoAnadirProductos = jCheckBox3.isSelected();
+    boolean permisoEliminarProductos = jCheckBox4.isSelected();
+    boolean permisoEditarProductos = jCheckBox5.isSelected();
+    boolean permisoVerInventario = jCheckBox6.isSelected();
+    boolean permisoAdministrador = jCheckBox7.isSelected();
+
+    // Conecta a tu base de datos e inserta (usa try-with-resources)
+    try (Connection conn = ConexionBD.getConexion(
+    Sesion.getUsuario(),
+    Sesion.getContrasena(),
+    Sesion.getBaseDatos()
+    )) {
+        String sql = "INSERT INTO usuarios (usuario, nombre_completo, contrasena, " +
+            "permiso_utilizar_productos_comunes, permiso_aplicar_descuentos, permiso_revisar_historial_ventas, " +
+            "permiso_cobrar_ticket, permiso_eliminar_art_venta, permiso_usar_buscador_productos, permiso_usar_varios, " +
+            "permiso_avalar_productos, permiso_manejar_varios_tickets, permiso_adm_clientes_avalados, " +
+            "permiso_anadir_productos, permiso_eliminar_productos, permiso_editar_productos, permiso_ver_inventario, permiso_administrador) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, usuario);
+        ps.setString(2, nombreCompleto);
+        ps.setString(3, contrasena); // En producción: guarda hash!
+        ps.setBoolean(4, permisoUtilizarProductosComunes);
+        ps.setBoolean(5, permisoAplicarDescuentos);
+        ps.setBoolean(6, permisoRevisarHistorialVentas);
+        ps.setBoolean(7, permisoCobrarTicket);
+        ps.setBoolean(8, permisoEliminarArtVenta);
+        ps.setBoolean(9, permisoUsarBuscadorProductos);
+        ps.setBoolean(10, permisoUsarVarios);
+        ps.setBoolean(11, permisoAvalarProductos);
+        ps.setBoolean(12, permisoManejarVariosTickets);
+        ps.setBoolean(13, permisoAdmClientesAvalados);
+        ps.setBoolean(14, permisoAnadirProductos);
+        ps.setBoolean(15, permisoEliminarProductos);
+        ps.setBoolean(16, permisoEditarProductos);
+        ps.setBoolean(17, permisoVerInventario);
+        ps.setBoolean(18, permisoAdministrador);
+
+        ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Usuario guardado correctamente");
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al guardar usuario: " + ex.getMessage());
+        }
+    cargarUsuariosEnTabla();
     }//GEN-LAST:event_enviarUsuarioActionPerformed
+
+    private void eliminarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCajeroActionPerformed
+            String usuarioSeleccionado = (String) cajeroComboBoxElim.getSelectedItem();
+            String usuarioActualPreLobby = ventanaPreLobby != null ? ventanaPreLobby.getCajeroSeleccionado() : null;
+
+            if (usuarioSeleccionado == null) {
+                JOptionPane.showMessageDialog(this, "Selecciona un cajero para eliminar.");
+                return;
+            }
+            if (usuarioActualPreLobby != null && usuarioSeleccionado.equals(usuarioActualPreLobby)) {
+                JOptionPane.showMessageDialog(this, "No puedes eliminar el cajero que está actualmente en uso.");
+                return;
+            }
+            int respuesta = JOptionPane.showConfirmDialog(this, 
+                    "¿Estás seguro de que quieres eliminar el usuario '" + usuarioSeleccionado + "'?", 
+                    "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                try (Connection conn = ConexionBD.getConexion(
+                        Sesion.getUsuario(),
+                        Sesion.getContrasena(),
+                        Sesion.getBaseDatos())) {
+
+                    String sql = "DELETE FROM usuarios WHERE usuario = ?";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, usuarioSeleccionado);
+                    int filas = ps.executeUpdate();
+                    if (filas > 0) {
+                        JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente.");
+                        cargarCajerosEliminar(); // Refresca la lista
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo eliminar el usuario.");
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar usuario: " + e.getMessage());
+                }
+            }
+            if (ventanaPreLobby != null) {
+                ventanaPreLobby.cargarCajerosDesdeBD();
+            }
+            cargarUsuariosEnTabla();
+    }//GEN-LAST:event_eliminarCajeroActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new admUsuarios().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel administrarUsuariosLabel;

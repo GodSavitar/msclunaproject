@@ -4,6 +4,13 @@
  */
 package mscluna.com.app.mvc.view;
 import javax.swing.ImageIcon;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import mscluna.com.app.mvc.controller.ConexionBD;
+import mscluna.com.app.mvc.controller.Sesion;
 
 
 /**
@@ -20,6 +27,7 @@ public class preLobby extends javax.swing.JFrame {
     public preLobby() {
         initComponents();
         this.setLocationRelativeTo(null);
+        cargarCajerosDesdeBD();
     }
 
     /**
@@ -71,7 +79,7 @@ public class preLobby extends javax.swing.JFrame {
 
         seleccionarCajero.setBackground(new java.awt.Color(255, 255, 255));
         seleccionarCajero.setForeground(new java.awt.Color(0, 0, 0));
-        seleccionarCajero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cajero1" }));
+        seleccionarCajero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "adminuser", "usuariosecond" }));
         panelInicio.add(seleccionarCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 160, 30));
 
         dineroEnCajaLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -158,10 +166,39 @@ public class preLobby extends javax.swing.JFrame {
 
 
     private void empezarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empezarTurnoActionPerformed
-         lobby ventanaLobby = new lobby(getCajeroSeleccionado(),getTurno(), getDineroC());
-         ventanaLobby.setVisible(true);
-         this.dispose();
+        String usuarioCajero = (String) seleccionarCajero.getSelectedItem();
+        String passIngresada = new String(contraUser.getPassword());
 
+        try {
+            try (Connection conn = ConexionBD.getConexion(
+                    Sesion.getUsuario(),
+                    Sesion.getContrasena(),
+                    Sesion.getBaseDatos())) {
+
+                String sql = "SELECT contrasena, permiso_administrador FROM usuarios WHERE usuario = ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, usuarioCajero);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    String passBD = rs.getString("contrasena");
+                    int permisoAdmin = rs.getInt("permiso_administrador");
+                    if (passBD.equals(passIngresada)) {
+                        // Acceso concedido
+                        lobby ventanaLobby = new lobby(this,getCajeroSeleccionado(), getTurno(), getDineroC(), permisoAdmin);
+                        ventanaLobby.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuario no encontrado.");
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_empezarTurnoActionPerformed
 
     private void cerrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarButtonActionPerformed
@@ -178,7 +215,24 @@ public class preLobby extends javax.swing.JFrame {
         }
         eyeNew = !eyeNew; // Alternar estado
     }//GEN-LAST:event_eyeButtonMouseClicked
-    
+    public void cargarCajerosDesdeBD() {
+    seleccionarCajero.removeAllItems();
+    try (Connection conn = ConexionBD.getConexion(
+            Sesion.getUsuario(),
+            Sesion.getContrasena(),
+            Sesion.getBaseDatos())) {
+
+        String sql = "SELECT usuario FROM usuarios";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            seleccionarCajero.addItem(rs.getString("usuario"));
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error cargando usuarios: " + e.getMessage());
+    }
+}
     public String getCajeroSeleccionado() {
         return seleccionarCajero.getSelectedItem().toString();
     }
@@ -188,6 +242,7 @@ public class preLobby extends javax.swing.JFrame {
     public String getDineroC(){
         return dineroEnCaja.getText();
     }
+
     /**
      * @param args the command line arguments
      */

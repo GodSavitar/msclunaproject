@@ -32,12 +32,14 @@ public class lobby extends javax.swing.JFrame {
     private OperacionesBD operacionesBD;
     private VentasManager ventasManager;
     private double totalVentasTurno = 0.0;
+    private double dineroInicialTurno = 0.0;
     private String cajero;
     private String turno;
-    private double dineroInicialTurno = 0.0;
+    private JButton btnAdminOnly;
+    private preLobby ventanaPreLobby;
     
-public lobby(String cajero, String turno, String dineroInicial) {
-
+public lobby(preLobby ventanaPreLobby, String cajero, String turno, String dineroInicial, int permisoAdmin) {
+    this.ventanaPreLobby = ventanaPreLobby;
     this.cajero = cajero;
     this.turno = turno;
     try {
@@ -357,9 +359,7 @@ private void cargarInventarioATabla() {
         nombreCajeroBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 730));
         setMinimumSize(new java.awt.Dimension(1280, 730));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1074,6 +1074,7 @@ private void cargarInventarioATabla() {
     settingsButton.setBackground(null);
     settingsButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceConfig.png")));
     settingsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    settingsButton.setEnabled(false);
     settingsButton.setBorderPainted(false);
     settingsButton.setContentAreaFilled(false);
     settingsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1558,8 +1559,8 @@ private void cargarInventarioATabla() {
     }//GEN-LAST:event_historialCortesButtonActionPerformed
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        configuracion config = new configuracion();
-        config.setVisible(true);
+         configuracion ventanaConfig = new configuracion(ventanaPreLobby);
+         ventanaConfig.setVisible(true);
     }//GEN-LAST:event_settingsButtonActionPerformed
     class ButtonRenderer extends JButton implements javax.swing.table.TableCellRenderer {
         public ButtonRenderer() { setText("X"); setMargin(new java.awt.Insets(2,2,2,2)); }

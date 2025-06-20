@@ -30,4 +30,14 @@ public class Sesion {
     public static String getBaseDatos() {
         return baseDatos;
     }
+    
+    private static int permisoAdministrador;
+
+public static void setPermisoAdministrador(int permiso) {
+    permisoAdministrador = permiso;
+}
+
+public static int getPermisoAdministrador() {
+    return permisoAdministrador;
+}
 }
