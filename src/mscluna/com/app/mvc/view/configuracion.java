@@ -42,6 +42,7 @@ public class configuracion extends javax.swing.JFrame {
         generadorTicketsButton = new javax.swing.JButton();
         notificacionesButton = new javax.swing.JButton();
         accesoButton = new javax.swing.JButton();
+        cambiarRutaJSON = new javax.swing.JButton();
         baseDeDatosSelect = new javax.swing.JLabel();
         copiaSeguridadButton = new javax.swing.JButton();
         actualizacionesButton = new javax.swing.JButton();
@@ -163,10 +164,26 @@ public class configuracion extends javax.swing.JFrame {
         });
         bgBase.add(accesoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 130, 40));
 
+        cambiarRutaJSON.setBackground(new java.awt.Color(65, 220, 127));
+        cambiarRutaJSON.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cambiarRutaJSON.setForeground(new java.awt.Color(255, 255, 255));
+        cambiarRutaJSON.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceTicket.png")));
+        cambiarRutaJSON.setText("Ruta JSON");
+        cambiarRutaJSON.setBorder(null);
+        cambiarRutaJSON.setBorderPainted(false);
+        cambiarRutaJSON.setFocusPainted(false);
+        cambiarRutaJSON.setFocusable(false);
+        cambiarRutaJSON.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarRutaJSONActionPerformed(evt);
+            }
+        });
+        bgBase.add(cambiarRutaJSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 130, 40));
+
         baseDeDatosSelect.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
         baseDeDatosSelect.setForeground(new java.awt.Color(102, 102, 102));
         baseDeDatosSelect.setText("Base de Datos");
-        bgBase.add(baseDeDatosSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+        bgBase.add(baseDeDatosSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
         copiaSeguridadButton.setBackground(new java.awt.Color(65, 220, 127));
         copiaSeguridadButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -182,7 +199,7 @@ public class configuracion extends javax.swing.JFrame {
                 copiaSeguridadButtonActionPerformed(evt);
             }
         });
-        bgBase.add(copiaSeguridadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 170, 40));
+        bgBase.add(copiaSeguridadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 170, 40));
 
         actualizacionesButton.setBackground(new java.awt.Color(65, 220, 127));
         actualizacionesButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -198,7 +215,7 @@ public class configuracion extends javax.swing.JFrame {
                 actualizacionesButtonActionPerformed(evt);
             }
         });
-        bgBase.add(actualizacionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 120, 40));
+        bgBase.add(actualizacionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, 40));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -223,7 +240,8 @@ public class configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_admUsuariosButtonActionPerformed
 
     private void modificarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarUsuariosActionPerformed
-        // TODO add your handling code here:
+        modUsuarios mod = new modUsuarios();
+        mod.setVisible(true);
     }//GEN-LAST:event_modificarUsuariosActionPerformed
 
     private void generadorTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generadorTicketsButtonActionPerformed
@@ -238,6 +256,11 @@ public class configuracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_actualizacionesButtonActionPerformed
 
+    private void cambiarRutaJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarRutaJSONActionPerformed
+        rutaJSON ruta = new rutaJSON();
+        ruta.setVisible(true);
+    }//GEN-LAST:event_cambiarRutaJSONActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +270,7 @@ public class configuracion extends javax.swing.JFrame {
     private javax.swing.JButton admUsuariosButton;
     private javax.swing.JLabel baseDeDatosSelect;
     private javax.swing.JPanel bgBase;
+    private javax.swing.JButton cambiarRutaJSON;
     private javax.swing.JLabel configLabel;
     private javax.swing.JButton copiaSeguridadButton;
     private javax.swing.JButton generadorTicketsButton;

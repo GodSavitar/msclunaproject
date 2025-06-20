@@ -9,6 +9,7 @@ import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
+import javax.swing.table.DefaultTableModel;
 import mscluna.com.app.mvc.controller.ConexionBD;
 import mscluna.com.app.mvc.controller.Sesion;
 
@@ -391,28 +392,27 @@ public class admUsuarios extends javax.swing.JFrame {
             bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgBaseLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgBaseLayout.createSequentialGroup()
-                        .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usuarioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(usuarioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelNuevoCajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(bgBaseLayout.createSequentialGroup()
-                                .addComponent(buscarCajeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nuevoCajeroButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(eliminarCajeroButton)
-                                .addGap(64, 64, 64))))
-                    .addComponent(administrarUsuariosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(buscarCajeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(nuevoCajeroButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarCajeroButton))
+                    .addGroup(bgBaseLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(panelNuevoCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(administrarUsuariosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgBaseLayout.createSequentialGroup()
-                    .addContainerGap(299, Short.MAX_VALUE)
+                    .addContainerGap(324, Short.MAX_VALUE)
                     .addComponent(panelEliminarCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(25, Short.MAX_VALUE)))
+                    .addContainerGap(50, Short.MAX_VALUE)))
         );
         bgBaseLayout.setVerticalGroup(
             bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,14 +428,14 @@ public class admUsuarios extends javax.swing.JFrame {
                         .addComponent(eliminarCajeroButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelNuevoCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelNuevoCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(bgBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgBaseLayout.createSequentialGroup()
-                    .addContainerGap(92, Short.MAX_VALUE)
+                    .addContainerGap(100, Short.MAX_VALUE)
                     .addComponent(panelEliminarCajero, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(32, Short.MAX_VALUE)))
+                    .addContainerGap(40, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -451,30 +451,32 @@ public class admUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        public void cargarUsuariosEnTabla() {
-        // Definir el modelo de la tabla con las columnas que quieres
-        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
-            new Object[]{"ID", "Usuario", "Nombre"}, 0
-        );
-        try (Connection conn = ConexionBD.getConexion(
-                Sesion.getUsuario(),
-                Sesion.getContrasena(),
-                Sesion.getBaseDatos())) {
-            String sql = "SELECT id, usuario, nombre_completo FROM usuarios";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
+private void cargarUsuariosEnTabla() {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("ID");
+    model.addColumn("Usuario");
+    model.addColumn("Nombre Completo");
+    model.addColumn("¿Admin?");
+    try (Connection conn = ConexionBD.getConexion(
+            Sesion.getUsuario(),
+            Sesion.getContrasena(),
+            Sesion.getBaseDatos())) {
+        String sql = "SELECT id, usuario, nombre_completo, permiso_administrador FROM usuarios";
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String usuario = rs.getString("usuario");
                 String nombre = rs.getString("nombre_completo");
-                modelo.addRow(new Object[]{id, usuario, nombre});
+                boolean admin = rs.getInt("permiso_administrador") == 1;
+                model.addRow(new Object[]{id, usuario, nombre, admin ? "Sí" : "No"});
             }
-            usuariosTable.setModel(modelo);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error cargando usuarios: " + e.getMessage());
         }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar usuarios: " + e.getMessage());
     }
+    usuariosTable.setModel(model);
+}
         
 public void cargarCajerosEliminar() {
     cajeroComboBoxElim.removeAllItems();

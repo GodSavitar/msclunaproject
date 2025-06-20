@@ -11,6 +11,10 @@ import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -25,6 +29,7 @@ import mscluna.com.app.mvc.model.Producto;
 import mscluna.com.app.mvc.view.preLobby;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultCellEditor;
+import mscluna.com.app.mvc.controller.ConexionBD;
 
 
 public class lobby extends javax.swing.JFrame {
@@ -845,6 +850,9 @@ private void cargarInventarioATabla() {
     dineroEnCajaLabel.setForeground(new java.awt.Color(0, 0, 0));
     dineroEnCajaLabel.setText("Dinero en caja:");
     cortePanel.add(dineroEnCajaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, 40));
+
+    dineroEnCaja.setBackground(new java.awt.Color(255, 255, 255));
+    dineroEnCaja.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
     cortePanel.add(dineroEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 130, 40));
 
     entradaLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -856,6 +864,9 @@ private void cargarInventarioATabla() {
     entradasDeDinero.setForeground(new java.awt.Color(255, 102, 0));
     cortePanel.add(entradasDeDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 200, 30));
 
+    cortarButton.setBackground(new java.awt.Color(65, 220, 127));
+    cortarButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+    cortarButton.setForeground(new java.awt.Color(255, 255, 255));
     cortarButton.setText("Cortar");
     cortarButton.setFocusPainted(false);
     cortarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -865,6 +876,9 @@ private void cargarInventarioATabla() {
     });
     cortePanel.add(cortarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 110, 40));
 
+    cerrarTurnoButton.setBackground(new java.awt.Color(65, 220, 127));
+    cerrarTurnoButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+    cerrarTurnoButton.setForeground(new java.awt.Color(255, 255, 255));
     cerrarTurnoButton.setText("Cerrar turno");
     cerrarTurnoButton.setFocusPainted(false);
     cerrarTurnoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -899,6 +913,9 @@ private void cargarInventarioATabla() {
         horaTurno.setText("De las 3:00 p.m a las 10:00 p.m");
     }
 
+    historialCortesButton.setBackground(new java.awt.Color(65, 220, 127));
+    historialCortesButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+    historialCortesButton.setForeground(new java.awt.Color(255, 255, 255));
     historialCortesButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceHistorial.png")));
     historialCortesButton.setFocusPainted(false);
     historialCortesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1074,7 +1091,6 @@ private void cargarInventarioATabla() {
     settingsButton.setBackground(null);
     settingsButton.setIcon(new ImageIcon(getClass().getResource("/mscluna/com/app/mvc/images/resourceConfig.png")));
     settingsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    settingsButton.setEnabled(false);
     settingsButton.setBorderPainted(false);
     settingsButton.setContentAreaFilled(false);
     settingsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1274,51 +1290,75 @@ private void cargarInventarioATabla() {
         cargarInventarioATabla();
     }//GEN-LAST:event_actualizarTablaInventarioActionPerformed
 
+        private String obtenerUltimaRutaJson(Connection conn) throws SQLException {
+        String sql = "SELECT ruta FROM rutas_json ORDER BY fecha_registro DESC, id DESC LIMIT 1";
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getString("ruta");
+            }
+        }
+        return null;
+    }
+        
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
-        String ventasJson = ventasManager.getVentasComoJson();
+            String ventasJson = ventasManager.getVentasComoJson();
 
-        try {
-            String baseDir = "C:\\Users\\luiis\\OneDrive\\Escritorio\\JSONS";
-            File dir = new File(baseDir);
-            if (!dir.exists()) dir.mkdirs();
+            try (Connection conn = ConexionBD.getConexion(
+                    Sesion.getUsuario(),
+                    Sesion.getContrasena(),
+                    Sesion.getBaseDatos())) {
 
-            String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-            String fileName = "venta_" + timestamp + ".json";
-            File file = new File(dir, fileName);
+                String baseDir = obtenerUltimaRutaJson(conn);
+                if (baseDir == null || baseDir.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No hay una ruta de carpeta configurada. Por favor, configúrala primero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-            try (FileWriter fw = new FileWriter(file)) {
-                fw.write(ventasJson);
+                File dir = new File(baseDir);
+                if (!dir.exists()) dir.mkdirs();
+
+                String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+                String fileName = "venta_" + timestamp + ".json";
+                File file = new File(dir, fileName);
+
+                try (FileWriter fw = new FileWriter(file)) {
+                    fw.write(ventasJson);
+                }
+                JOptionPane.showMessageDialog(this, "Venta realizada exitosamente.\nArchivo guardado en:\n" + file.getAbsolutePath(), "Venta", JOptionPane.INFORMATION_MESSAGE);
+
+                ventasManager.descontarProductosEnBD(operacionesBD);
+                double total = ventasManager.calcularTotal();
+                ventasManager.registrarVentaEnBD(operacionesBD, total); 
+                totalVentasTurno += total;
+                actualizaLabelsTotales();
+                entradasDeDinero.setText(String.format("%.2f", totalVentasTurno));
+                try {
+                    double pagaCon = Double.parseDouble(cambioPagar.getText().trim());
+                    ventasManager.calcularCambio(pagaCon);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Monto de pago inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    String tipo = (String) model.getValueAt(i, 6);
+                    if ("varios".equals(tipo)) {
+                        String descripcion = (String) model.getValueAt(i, 1);
+                        float cantidad = Float.parseFloat(model.getValueAt(i, 2).toString());
+                        float totalvario = Float.parseFloat(model.getValueAt(i, 5).toString());
+                        operacionesBD.insertarVarios(descripcion, cantidad, totalvario);
+                    }
+                }
+                ventasManager.limpiarTablaVentas();
+                cambioPagar.setText("");
+                cargarHistorialATabla();
+                cobrarButton.setEnabled(false);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error al guardar el archivo de venta:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(this, "Venta realizada exitosamente.\nArchivo guardado en:\n" + file.getAbsolutePath(), "Venta", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar el archivo de venta:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        ventasManager.descontarProductosEnBD(operacionesBD);
-        double total = ventasManager.calcularTotal();
-        ventasManager.registrarVentaEnBD(operacionesBD, total); // SOLO AQUÍ
-        totalVentasTurno += total;
-        actualizaLabelsTotales();
-        entradasDeDinero.setText(String.format("%.2f", totalVentasTurno));
-        try {
-            double pagaCon = Double.parseDouble(cambioPagar.getText().trim());
-            ventasManager.calcularCambio(pagaCon);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Monto de pago inválido.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
-        for (int i = 0; i < model.getRowCount(); i++) {
-            String tipo = (String) model.getValueAt(i, 6);
-            if ("varios".equals(tipo)) {
-                String descripcion = (String) model.getValueAt(i, 1);
-                float cantidad = Float.parseFloat(model.getValueAt(i, 2).toString());
-                float totalvario = Float.parseFloat(model.getValueAt(i, 5).toString());
-                operacionesBD.insertarVarios(descripcion, (float)cantidad, (float)total);
-            }
-        }
-        ventasManager.limpiarTablaVentas();
-        cambioPagar.setText("");
-        cargarHistorialATabla();
-        cobrarButton.setEnabled(false);
     }//GEN-LAST:event_cobrarButtonActionPerformed
 
     private void buscarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProductoVentaActionPerformed
