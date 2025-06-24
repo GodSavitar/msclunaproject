@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterJob;
 import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.awt.print.*;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -29,6 +31,8 @@ import mscluna.com.app.mvc.model.Producto;
 import mscluna.com.app.mvc.view.preLobby;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JTable;
+import mscluna.com.app.mvc.view.TicketPrinter;
 import mscluna.com.app.mvc.controller.ConexionBD;
 
 
@@ -205,7 +209,18 @@ public void agregarProductoAVentaDesdeBuscar(Producto producto, int cantidad) {
     }
     ventasManager.calcularTotal();
 }
-
+private void imprimirTicket(JTable tablaVentas, double totalVenta) {
+    PrinterJob job = PrinterJob.getPrinterJob();
+    job.setPrintable(new TicketPrinter(tablaVentas, totalVenta));
+    boolean doPrint = job.printDialog();
+    if (doPrint) {
+        try {
+            job.print();
+        } catch (PrinterException e) {
+            JOptionPane.showMessageDialog(null, "Error al imprimir: " + e.getMessage());
+        }
+    }
+}
 private void cargarInventarioATabla() {
     // ---- Para productos normales (tablaInventarioGFV) ----
     List<Producto> productos = operacionesBD.obtenerTodosProductos();
@@ -1302,63 +1317,72 @@ private void cargarInventarioATabla() {
     }
         
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
-            String ventasJson = ventasManager.getVentasComoJson();
+    String ventasJson = ventasManager.getVentasComoJson();
 
-            try (Connection conn = ConexionBD.getConexion(
-                    Sesion.getUsuario(),
-                    Sesion.getContrasena(),
-                    Sesion.getBaseDatos())) {
+    try (Connection conn = ConexionBD.getConexion(
+            Sesion.getUsuario(),
+            Sesion.getContrasena(),
+            Sesion.getBaseDatos())) {
 
-                String baseDir = obtenerUltimaRutaJson(conn);
-                if (baseDir == null || baseDir.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "No hay una ruta de carpeta configurada. Por favor, configúrala primero.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+        String baseDir = obtenerUltimaRutaJson(conn);
+        if (baseDir == null || baseDir.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una ruta de carpeta configurada. Por favor, configúrala primero.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-                File dir = new File(baseDir);
-                if (!dir.exists()) dir.mkdirs();
+        File dir = new File(baseDir);
+        if (!dir.exists()) dir.mkdirs();
 
-                String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-                String fileName = "venta_" + timestamp + ".json";
-                File file = new File(dir, fileName);
+        String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String fileName = "venta_" + timestamp + ".json";
+        File file = new File(dir, fileName);
 
-                try (FileWriter fw = new FileWriter(file)) {
-                    fw.write(ventasJson);
-                }
-                JOptionPane.showMessageDialog(this, "Venta realizada exitosamente.\nArchivo guardado en:\n" + file.getAbsolutePath(), "Venta", JOptionPane.INFORMATION_MESSAGE);
+        try (FileWriter fw = new FileWriter(file)) {
+            fw.write(ventasJson);
+        }
+        JOptionPane.showMessageDialog(this, "Venta realizada exitosamente.\nArchivo guardado en:\n" + file.getAbsolutePath(), "Venta", JOptionPane.INFORMATION_MESSAGE);
 
-                ventasManager.descontarProductosEnBD(operacionesBD);
-                double total = ventasManager.calcularTotal();
-                ventasManager.registrarVentaEnBD(operacionesBD, total); 
-                totalVentasTurno += total;
-                actualizaLabelsTotales();
-                entradasDeDinero.setText(String.format("%.2f", totalVentasTurno));
-                try {
-                    double pagaCon = Double.parseDouble(cambioPagar.getText().trim());
-                    ventasManager.calcularCambio(pagaCon);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Monto de pago inválido.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    String tipo = (String) model.getValueAt(i, 6);
-                    if ("varios".equals(tipo)) {
-                        String descripcion = (String) model.getValueAt(i, 1);
-                        float cantidad = Float.parseFloat(model.getValueAt(i, 2).toString());
-                        float totalvario = Float.parseFloat(model.getValueAt(i, 5).toString());
-                        operacionesBD.insertarVarios(descripcion, cantidad, totalvario);
-                    }
-                }
-                ventasManager.limpiarTablaVentas();
-                cambioPagar.setText("");
-                cargarHistorialATabla();
-                cobrarButton.setEnabled(false);
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error al guardar el archivo de venta:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        ventasManager.descontarProductosEnBD(operacionesBD);
+        double total = ventasManager.calcularTotal();
+        ventasManager.registrarVentaEnBD(operacionesBD, total); 
+        totalVentasTurno += total;
+        actualizaLabelsTotales();
+        entradasDeDinero.setText(String.format("%.2f", totalVentasTurno));
+        try {
+            double pagaCon = Double.parseDouble(cambioPagar.getText().trim());
+            ventasManager.calcularCambio(pagaCon);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Monto de pago inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String tipo = (String) model.getValueAt(i, 6);
+            if ("varios".equals(tipo)) {
+                String descripcion = (String) model.getValueAt(i, 1);
+                float cantidad = Float.parseFloat(model.getValueAt(i, 2).toString());
+                float totalvario = Float.parseFloat(model.getValueAt(i, 5).toString());
+                operacionesBD.insertarVarios(descripcion, cantidad, totalvario);
             }
+        }
+
+        // ==== AQUI SE IMPRIME EL TICKET ====
+        try {
+            imprimirTicket(tablaVentas, total);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al imprimir el ticket:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        // ==== FIN IMPRESION TICKET ====
+
+        ventasManager.limpiarTablaVentas();
+        cambioPagar.setText("");
+        cargarHistorialATabla();
+        cobrarButton.setEnabled(false);
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar el archivo de venta:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_cobrarButtonActionPerformed
 
     private void buscarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProductoVentaActionPerformed
