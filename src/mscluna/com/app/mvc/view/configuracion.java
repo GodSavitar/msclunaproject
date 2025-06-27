@@ -89,7 +89,7 @@ public class configuracion extends javax.swing.JFrame {
                 admUsuariosButtonActionPerformed(evt);
             }
         });
-        bgBase.add(admUsuariosButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 150, 40));
+        bgBase.add(admUsuariosButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 180, 40));
 
         modificarUsuarios.setBackground(new java.awt.Color(65, 220, 127));
         modificarUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -109,7 +109,7 @@ public class configuracion extends javax.swing.JFrame {
                 modificarUsuariosActionPerformed(evt);
             }
         });
-        bgBase.add(modificarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 150, 40));
+        bgBase.add(modificarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 150, 40));
 
         personalizacionSelect.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
         personalizacionSelect.setForeground(new java.awt.Color(102, 102, 102));
@@ -162,7 +162,7 @@ public class configuracion extends javax.swing.JFrame {
                 accesoButtonActionPerformed(evt);
             }
         });
-        bgBase.add(accesoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 130, 40));
+        bgBase.add(accesoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 110, 40));
 
         cambiarRutaJSON.setBackground(new java.awt.Color(65, 220, 127));
         cambiarRutaJSON.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -199,7 +199,7 @@ public class configuracion extends javax.swing.JFrame {
                 copiaSeguridadButtonActionPerformed(evt);
             }
         });
-        bgBase.add(copiaSeguridadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 170, 40));
+        bgBase.add(copiaSeguridadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 180, 40));
 
         actualizacionesButton.setBackground(new java.awt.Color(65, 220, 127));
         actualizacionesButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -215,7 +215,7 @@ public class configuracion extends javax.swing.JFrame {
                 actualizacionesButtonActionPerformed(evt);
             }
         });
-        bgBase.add(actualizacionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, 40));
+        bgBase.add(actualizacionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 140, 40));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));

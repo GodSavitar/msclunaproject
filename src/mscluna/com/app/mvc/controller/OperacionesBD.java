@@ -76,7 +76,7 @@ public class OperacionesBD {
     }
 
     public boolean insertarProducto(Producto producto) {
-        String sql = "INSERT INTO products (id, description, unit_price, amount, category, discount, importe, minimum) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO products (id, description, unit_price, amount, category, discount, importe, minimum, prizeCost, prizeWholesale) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, producto.getId());
@@ -87,6 +87,9 @@ public class OperacionesBD {
             pstmt.setString(6, producto.getDiscount());
             pstmt.setFloat(7, producto.getImporte());
             pstmt.setInt(8, producto.getMinimum());
+            pstmt.setFloat(9, producto.getPrizeCost());
+            pstmt.setFloat(10, producto.getPrizeWholesale());
+            
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -96,7 +99,7 @@ public class OperacionesBD {
     }
 
     public boolean modificarProducto(Producto producto) {
-        String sql = "UPDATE products SET description = ?, unit_price = ?, amount = ?, category = ?, discount = ?, importe = ?, minimum = ? WHERE id = ?";
+        String sql = "UPDATE products SET description = ?, unit_price = ?, amount = ?, category = ?, discount = ?, importe = ?, minimum = ?, prizeCost = ?, prizeWholesale = ? WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, producto.getDescription());
@@ -105,8 +108,10 @@ public class OperacionesBD {
             pstmt.setString(4, producto.getCategory());
             pstmt.setString(5, producto.getDiscount());
             pstmt.setFloat(6, producto.getImporte());
-            pstmt.setInt(7, producto.getMinimum());
-            pstmt.setString(8, producto.getId());
+            pstmt.setInt(7, producto.getMinimum());  
+            pstmt.setFloat(8, producto.getPrizeCost());
+            pstmt.setFloat(9, producto.getPrizeWholesale());
+            pstmt.setString(10, producto.getId());
             int afectados = pstmt.executeUpdate();
             return afectados > 0;
         } catch (SQLException e) {
@@ -223,8 +228,9 @@ public class OperacionesBD {
         return null;
     }
 
+
     public boolean insertarProductoGranel(ProductoGranel producto) {
-        String sql = "INSERT INTO g_products (id_gproducts, descriptionGranel, prizeForKg, amountForKg, minimumAmount, prizeForUnit, categoryg) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO g_products (id_gproducts, descriptionGranel, prizeForKg, amountForKg, minimumAmount, prizeForUnit, categoryg, prizeCost, prizeWholesale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, producto.getIdGProducts());
@@ -234,6 +240,8 @@ public class OperacionesBD {
             pstmt.setFloat(5, producto.getMinimumAmount());
             pstmt.setFloat(6, producto.getPrizeForUnit());
             pstmt.setString(7, producto.getCategoryg());
+            pstmt.setFloat(8, producto.getPrizeCost());
+            pstmt.setFloat(9, producto.getPrizeWholesale());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -243,7 +251,7 @@ public class OperacionesBD {
     }
 
     public boolean modificarProductoGranel(ProductoGranel producto) {
-        String sql = "UPDATE g_products SET descriptionGranel = ?, prizeForKg = ?, amountForKg = ?, minimumAmount = ?, prizeForUnit = ?, categoryg = ? WHERE id_gproducts = ?";
+        String sql = "UPDATE g_products SET descriptionGranel = ?, prizeForKg = ?, amountForKg = ?, minimumAmount = ?, prizeForUnit = ?, categoryg = ?, prizeCost = ?, prizeWholesale = ? WHERE id_gproducts = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, producto.getDescriptionGranel());
@@ -252,7 +260,9 @@ public class OperacionesBD {
             pstmt.setFloat(4, producto.getMinimumAmount());
             pstmt.setFloat(5, producto.getPrizeForUnit());
             pstmt.setString(6, producto.getCategoryg());
-            pstmt.setString(7, producto.getIdGProducts());
+            pstmt.setFloat(7, producto.getPrizeCost());
+            pstmt.setFloat(8, producto.getPrizeWholesale());
+            pstmt.setString(9, producto.getIdGProducts());
             int afectados = pstmt.executeUpdate();
             return afectados > 0;
         } catch (SQLException e) {
@@ -366,7 +376,9 @@ public class OperacionesBD {
             rs.getString("category"),
             rs.getString("discount"),
             rs.getFloat("importe"),
-            rs.getInt("minimum")
+            rs.getInt("minimum"),
+            rs.getFloat("prizeCost"),
+            rs.getFloat("prizeWholesale")
         );
     }
 
@@ -378,7 +390,9 @@ public class OperacionesBD {
             rs.getFloat("amountForKg"),
             rs.getFloat("minimumAmount"),
             rs.getFloat("prizeForUnit"),
-            rs.getString("categoryg")
+            rs.getString("categoryg"),
+            rs.getFloat("prizeCost"),
+            rs.getFloat("prizeWholesale")
         );
     }
 
@@ -420,5 +434,21 @@ public class OperacionesBD {
             System.err.println("Error al insertar en tabla varios: " + e.getMessage());
         }
     }
-
+ // ---------- OBTENER RUTA JSON ----------------
+    public String obtenerRutaJsonPorId(int id) {
+    String ruta = null;
+    String sql = "SELECT ruta FROM rutas_json WHERE id = ?";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setInt(1, id);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                ruta = rs.getString("ruta");
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al obtener la ruta de rutas_json: " + e.getMessage());
+    }
+    return ruta;
+}
 }

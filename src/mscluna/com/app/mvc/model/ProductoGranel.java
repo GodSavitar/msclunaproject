@@ -8,8 +8,10 @@ public class ProductoGranel {
     private float minimumAmount;
     private float prizeForUnit;
     private String categoryg;
+    private float prizeCost;
+    private float prizeWholesale;
 
-    public ProductoGranel(String idGProducts, String descriptionGranel, float prizeForKg, float amountForKg, float minimumAmount, float prizeForUnit, String categoryg) {
+    public ProductoGranel(String idGProducts, String descriptionGranel, float prizeForKg, float amountForKg, float minimumAmount, float prizeForUnit, String categoryg, float prizeCost, float prizeWholesale) {
         this.idGProducts = idGProducts;
         this.descriptionGranel = descriptionGranel;
         this.prizeForKg = prizeForKg;
@@ -17,6 +19,8 @@ public class ProductoGranel {
         this.minimumAmount = minimumAmount;
         this.prizeForUnit = prizeForUnit;
         this.categoryg = categoryg;
+        this.prizeCost = prizeCost;
+        this.prizeWholesale = prizeWholesale;
     }
 
     // Getters y setters
@@ -34,4 +38,8 @@ public class ProductoGranel {
     public void setPrizeForUnit(float prizeForUnit) { this.prizeForUnit = prizeForUnit; }
     public String getCategoryg() { return categoryg; }
     public void setCategoryg(String categoryg) { this.categoryg = categoryg; }
+    public float getPrizeCost() { return prizeCost; }
+    public void setPrizeCost(float prizeCost) { this.prizeCost = prizeCost; }
+    public float getPrizeWholesale() { return prizeWholesale; }
+    public void setPrizeWholesale(float prizeWholesale) { this.prizeWholesale = prizeWholesale; }
 }

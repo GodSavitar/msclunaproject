@@ -58,13 +58,18 @@ public class editarProducto extends javax.swing.JFrame {
         precioDescuentoMod = new javax.swing.JFormattedTextField();
         modificarImporteLabel = new javax.swing.JLabel();
         importeMod = new javax.swing.JFormattedTextField();
-        asd = new javax.swing.JLabel();
+        modificarMinimoLabel = new javax.swing.JLabel();
         minimumMod = new javax.swing.JFormattedTextField();
         aceptarModificacion = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        modificarPrecioCostoLabel = new javax.swing.JLabel();
+        precioCostoMod = new javax.swing.JFormattedTextField();
+        modificarPrecioMayoreoLabel = new javax.swing.JLabel();
+        precioMayoreoMod = new javax.swing.JFormattedTextField();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,7 +112,7 @@ public class editarProducto extends javax.swing.JFrame {
 
         modificarDescLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarDescLabel.setText("Modificar descripcion:");
-        jPanel1.add(modificarDescLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, 30));
+        jPanel1.add(modificarDescLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 210, 130, 30));
 
         descMod.setBackground(new java.awt.Color(255, 255, 255));
         descMod.setForeground(new java.awt.Color(0, 0, 0));
@@ -115,8 +120,8 @@ public class editarProducto extends javax.swing.JFrame {
         jPanel1.add(descMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 450, 40));
 
         modificarPrecioULabel.setForeground(new java.awt.Color(0, 0, 0));
-        modificarPrecioULabel.setText("Modificar precio unitario:");
-        jPanel1.add(modificarPrecioULabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 140, 40));
+        modificarPrecioULabel.setText("Modificar Precio Venta:");
+        jPanel1.add(modificarPrecioULabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 130, 40));
 
         precioUnitMod.setBackground(new java.awt.Color(255, 255, 255));
         precioUnitMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -134,7 +139,7 @@ public class editarProducto extends javax.swing.JFrame {
 
         modificarCategoriaLabel.setForeground(new java.awt.Color(0, 0, 0));
         modificarCategoriaLabel.setText("Modificar categoria:");
-        jPanel1.add(modificarCategoriaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, 30));
+        jPanel1.add(modificarCategoriaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 360, 110, 30));
 
         categoriaMod.setBackground(new java.awt.Color(255, 255, 255));
         categoriaMod.setForeground(new java.awt.Color(0, 0, 0));
@@ -159,9 +164,9 @@ public class editarProducto extends javax.swing.JFrame {
         importeMod.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(importeMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 450, 40));
 
-        asd.setForeground(new java.awt.Color(0, 0, 0));
-        asd.setText("Modificar minimo: ");
-        jPanel1.add(asd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 516, 110, 30));
+        modificarMinimoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        modificarMinimoLabel.setText("Modificar minimo: ");
+        jPanel1.add(modificarMinimoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 516, 110, 30));
 
         minimumMod.setBackground(new java.awt.Color(255, 255, 255));
         minimumMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -177,13 +182,31 @@ public class editarProducto extends javax.swing.JFrame {
                 aceptarModificacionActionPerformed(evt);
             }
         });
-        jPanel1.add(aceptarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, 100, 50));
+        jPanel1.add(aceptarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 680, 100, 50));
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 810, 110));
 
+        modificarPrecioCostoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        modificarPrecioCostoLabel.setText("Precio Costo:");
+        jPanel1.add(modificarPrecioCostoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, -1, -1));
+
+        precioCostoMod.setBackground(new java.awt.Color(255, 255, 255));
+        precioCostoMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        precioCostoMod.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(precioCostoMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, 450, 40));
+
+        modificarPrecioMayoreoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        modificarPrecioMayoreoLabel.setText("Precio Mayoreo:");
+        jPanel1.add(modificarPrecioMayoreoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 640, -1, -1));
+
+        precioMayoreoMod.setBackground(new java.awt.Color(255, 255, 255));
+        precioMayoreoMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        precioMayoreoMod.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(precioMayoreoMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 630, 450, 40));
+
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 810, 510));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 810, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,8 +232,10 @@ public class editarProducto extends javax.swing.JFrame {
             String descuento = precioDescuentoMod.getText().trim();
             float importe = Float.parseFloat(importeMod.getText().trim());
             int minimum = Integer.parseInt(minimumMod.getText().trim());
-
-            Producto producto = new Producto(id, descripcion, unitPrice, amount, categoria, descuento, importe, minimum);
+            float prizeCost = Float.parseFloat(precioCostoMod.getText().trim());
+            float prizeWholesale = Float.parseFloat(precioMayoreoMod.getText().trim());
+            
+            Producto producto = new Producto(id, descripcion, unitPrice, amount, categoria, descuento, importe, minimum, prizeCost, prizeWholesale);
 
             boolean exito = operacionesBD.modificarProducto(producto);
 
@@ -238,6 +263,9 @@ public class editarProducto extends javax.swing.JFrame {
                     precioDescuentoMod.setText(producto.getDiscount());
                     importeMod.setText(String.valueOf(producto.getImporte()));
                     minimumMod.setText(String.valueOf(producto.getMinimum()));
+                    precioCostoMod.setText(String.valueOf(producto.getPrizeCost()));
+                    precioMayoreoMod.setText(String.valueOf(producto.getPrizeWholesale()));
+                    
                 } else {
                     productoSeleccionado.setText("Producto no encontrado");
                     // Limpiar campos
@@ -248,6 +276,9 @@ public class editarProducto extends javax.swing.JFrame {
                     precioDescuentoMod.setText("");
                     importeMod.setText("");
                     minimumMod.setText("");
+                    precioMayoreoMod.setText("");
+                    precioCostoMod.setText("");
+
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Código inválido.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -281,7 +312,6 @@ public class editarProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarModificacion;
-    private javax.swing.JLabel asd;
     private javax.swing.JFormattedTextField cantidadMod;
     private javax.swing.JTextField categoriaMod;
     private javax.swing.JFormattedTextField codProdEditar;
@@ -299,9 +329,14 @@ public class editarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel modificarCategoriaLabel;
     private javax.swing.JLabel modificarDescLabel;
     private javax.swing.JLabel modificarImporteLabel;
+    private javax.swing.JLabel modificarMinimoLabel;
+    private javax.swing.JLabel modificarPrecioCostoLabel;
     private javax.swing.JLabel modificarPrecioDescuentoLabel;
+    private javax.swing.JLabel modificarPrecioMayoreoLabel;
     private javax.swing.JLabel modificarPrecioULabel;
+    private javax.swing.JFormattedTextField precioCostoMod;
     private javax.swing.JFormattedTextField precioDescuentoMod;
+    private javax.swing.JFormattedTextField precioMayoreoMod;
     private javax.swing.JFormattedTextField precioUnitMod;
     private javax.swing.JLabel productoSeleccionado;
     // End of variables declaration//GEN-END:variables

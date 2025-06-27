@@ -4,25 +4,33 @@
  */
 package mscluna.com.app.mvc.view;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import mscluna.com.app.mvc.controller.ConexionBD;
 import mscluna.com.app.mvc.controller.Sesion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import mscluna.com.app.mvc.controller.OperacionesBD;
+
 
 /**
  *
  * @author luiis
  */
 public class rutaJSON extends javax.swing.JFrame {
-    
+    OperacionesBD operacionesBD;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(rutaJSON.class.getName());
-
+    
     /**
      * Creates new form rutaJSON
      */
     public rutaJSON() {
+            operacionesBD = new OperacionesBD(
+            Sesion.getUsuario(),
+            Sesion.getContrasena(),
+            Sesion.getBaseDatos()
+          );
             initComponents();
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setLocationRelativeTo(null);
@@ -42,6 +50,8 @@ public class rutaJSON extends javax.swing.JFrame {
         instruccion = new javax.swing.JLabel();
         rutaJson = new javax.swing.JTextField();
         enviarRuta = new javax.swing.JButton();
+        rutaActualLabel = new javax.swing.JLabel();
+        rutaActual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +80,13 @@ public class rutaJSON extends javax.swing.JFrame {
             }
         });
 
+        rutaActualLabel.setForeground(new java.awt.Color(0, 0, 0));
+        rutaActualLabel.setText("Ruta actual:");
+
+        String ruta = operacionesBD.obtenerRutaJsonPorId(1);
+        rutaActual.setText(ruta);
+        rutaActual.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,28 +97,40 @@ public class rutaJSON extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(rutaJsonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(rutaJson, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(enviarRuta))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(instruccion)))
+                        .addGap(101, 101, 101)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rutaJson, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(147, 147, 147)
+                                .addComponent(enviarRuta)))))
                 .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(rutaActualLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rutaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(instruccion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(rutaJsonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(instruccion)
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rutaActualLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rutaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rutaJson, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(enviarRuta)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,7 +172,9 @@ public class rutaJSON extends javax.swing.JFrame {
                     Sesion.getContrasena(),
                     Sesion.getBaseDatos())) {
 
-                String sql = "INSERT INTO rutas_json (ruta) VALUES (?)";
+                // Usa INSERT ... ON DUPLICATE KEY UPDATE para guardar siempre en id=1
+                String sql = "INSERT INTO rutas_json (id, ruta) VALUES (1, ?) " +
+                             "ON DUPLICATE KEY UPDATE ruta = VALUES(ruta)";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, ruta);
 
@@ -157,6 +188,10 @@ public class rutaJSON extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
             }
         }
+        rutaJson.setText("");
+        String rutaNew = operacionesBD.obtenerRutaJsonPorId(1);
+        rutaActual.setText(rutaNew != null ? rutaNew : "Sin ruta");
+        rutaActual.setForeground(Color.black);
     }//GEN-LAST:event_enviarRutaActionPerformed
 
     /**
@@ -188,6 +223,8 @@ public class rutaJSON extends javax.swing.JFrame {
     private javax.swing.JButton enviarRuta;
     private javax.swing.JLabel instruccion;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel rutaActual;
+    private javax.swing.JLabel rutaActualLabel;
     private javax.swing.JTextField rutaJson;
     private javax.swing.JLabel rutaJsonLabel;
     // End of variables declaration//GEN-END:variables

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import mscluna.com.app.mvc.view.lobby;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -153,6 +153,7 @@ public class login extends javax.swing.JFrame {
             userfield.setText("");
             userfield.setForeground(Color.black);
             userfield.setCaretColor(Color.black);
+            userfield.setText("root");
         }
     }//GEN-LAST:event_userfieldMouseClicked
 

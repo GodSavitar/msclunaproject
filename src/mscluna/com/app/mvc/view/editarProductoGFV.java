@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package mscluna.com.app.mvc.view;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import mscluna.com.app.mvc.controller.OperacionesBD;
 import mscluna.com.app.mvc.controller.Sesion;
@@ -17,6 +18,9 @@ public class editarProductoGFV extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(editarProductoGFV.class.getName());
     private OperacionesBD operacionesBD;
+    private ButtonGroup grupoUnidad;
+    private float ultimoPrecioPorUnidad = 0f;
+    private float ultimoPrecioPorKg = 0f;
     /**
      * Creates new form editarProductoGFV
      */
@@ -24,12 +28,19 @@ public class editarProductoGFV extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-         operacionesBD = new OperacionesBD(
+        operacionesBD = new OperacionesBD(
             Sesion.getUsuario(),
             Sesion.getContrasena(),
             Sesion.getBaseDatos()
         );
+        // Agrupar los radio buttons
+        grupoUnidad = new ButtonGroup();
+        grupoUnidad.add(pUnidad);
+        grupoUnidad.add(pKg);
+        pUnidad.addActionListener(e -> precioUnitModGFV.setText(String.valueOf(ultimoPrecioPorUnidad)));
+        pKg.addActionListener(e -> precioUnitModGFV.setText(String.valueOf(ultimoPrecioPorKg)));
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,22 +56,27 @@ public class editarProductoGFV extends javax.swing.JFrame {
         codProductoEditLabelGFV = new javax.swing.JLabel();
         codProdEditarGFV = new javax.swing.JFormattedTextField();
         ingresoProductoGFV = new javax.swing.JButton();
-        jSeparator2GFV = new javax.swing.JSeparator();
         instruccionLabelGFV = new javax.swing.JLabel();
         productoSeleccionadoGFV = new javax.swing.JLabel();
         categoriaModGFV = new javax.swing.JTextField();
         precioUnitModGFV = new javax.swing.JFormattedTextField();
         cantidadpKgModGFV = new javax.swing.JFormattedTextField();
-        precioPKgGFV = new javax.swing.JTextField();
         cantidadMinimapKgModGFV = new javax.swing.JFormattedTextField();
         aceptarModificacionGFV = new javax.swing.JButton();
         descripcionProductoIngresarGFV = new javax.swing.JLabel();
         precioUnitarioIngresarGFV = new javax.swing.JLabel();
-        precioPorKgIngresarGFV = new javax.swing.JLabel();
         existenciasIngresarGFV = new javax.swing.JLabel();
         categoriaIngresarGFV = new javax.swing.JLabel();
         minimoPorKgGFV = new javax.swing.JLabel();
         descModGFV1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        precioCostoMod = new javax.swing.JFormattedTextField();
+        precioMayoreoMod = new javax.swing.JFormattedTextField();
+        pUnidad = new javax.swing.JRadioButton();
+        pKg = new javax.swing.JRadioButton();
+        seleccionaUnidadLabel = new javax.swing.JLabel();
+        jSeparator2GFV = new javax.swing.JSeparator();
         jSeparator1GFV = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,9 +113,6 @@ public class editarProductoGFV extends javax.swing.JFrame {
         });
         jPanel1.add(ingresoProductoGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, -1, 40));
 
-        jSeparator2GFV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jSeparator2GFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 810, 110));
-
         instruccionLabelGFV.setForeground(new java.awt.Color(0, 0, 0));
         instruccionLabelGFV.setText("Producto a modificar:");
         jPanel1.add(instruccionLabelGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
@@ -110,27 +123,22 @@ public class editarProductoGFV extends javax.swing.JFrame {
         categoriaModGFV.setBackground(new java.awt.Color(255, 255, 255));
         categoriaModGFV.setForeground(new java.awt.Color(0, 0, 0));
         categoriaModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(categoriaModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 450, 40));
+        jPanel1.add(categoriaModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 450, 40));
 
         precioUnitModGFV.setBackground(new java.awt.Color(255, 255, 255));
         precioUnitModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         precioUnitModGFV.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(precioUnitModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 450, 40));
+        jPanel1.add(precioUnitModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 450, 40));
 
         cantidadpKgModGFV.setBackground(new java.awt.Color(255, 255, 255));
         cantidadpKgModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         cantidadpKgModGFV.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(cantidadpKgModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 450, 40));
-
-        precioPKgGFV.setBackground(new java.awt.Color(255, 255, 255));
-        precioPKgGFV.setForeground(new java.awt.Color(0, 0, 0));
-        precioPKgGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(precioPKgGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 450, 40));
+        jPanel1.add(cantidadpKgModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 450, 40));
 
         cantidadMinimapKgModGFV.setBackground(new java.awt.Color(255, 255, 255));
         cantidadMinimapKgModGFV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         cantidadMinimapKgModGFV.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(cantidadMinimapKgModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 450, 40));
+        jPanel1.add(cantidadMinimapKgModGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 450, 40));
 
         aceptarModificacionGFV.setBackground(new java.awt.Color(65, 220, 127));
         aceptarModificacionGFV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -141,41 +149,68 @@ public class editarProductoGFV extends javax.swing.JFrame {
                 aceptarModificacionGFVActionPerformed(evt);
             }
         });
-        jPanel1.add(aceptarModificacionGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 100, 50));
+        jPanel1.add(aceptarModificacionGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 670, 100, 50));
 
         descripcionProductoIngresarGFV.setForeground(new java.awt.Color(0, 0, 0));
         descripcionProductoIngresarGFV.setText("Descripción del producto:");
-        jPanel1.add(descripcionProductoIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 150, 40));
+        jPanel1.add(descripcionProductoIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 150, 40));
 
         precioUnitarioIngresarGFV.setForeground(new java.awt.Color(0, 0, 0));
-        precioUnitarioIngresarGFV.setText("Precio unitario:");
-        jPanel1.add(precioUnitarioIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 110, 40));
-
-        precioPorKgIngresarGFV.setForeground(new java.awt.Color(0, 0, 0));
-        precioPorKgIngresarGFV.setText("Precio p/Kg:");
-        jPanel1.add(precioPorKgIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 100, 40));
+        precioUnitarioIngresarGFV.setText("Precio Venta:");
+        jPanel1.add(precioUnitarioIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 100, 40));
 
         existenciasIngresarGFV.setForeground(new java.awt.Color(0, 0, 0));
         existenciasIngresarGFV.setText("Existencias (Cantidad p/kg):");
-        jPanel1.add(existenciasIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 170, 40));
+        jPanel1.add(existenciasIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 160, 40));
 
         categoriaIngresarGFV.setForeground(new java.awt.Color(0, 0, 0));
         categoriaIngresarGFV.setText("Categoria:");
-        jPanel1.add(categoriaIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 80, 40));
+        jPanel1.add(categoriaIngresarGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 70, 40));
 
         minimoPorKgGFV.setForeground(new java.awt.Color(0, 0, 0));
         minimoPorKgGFV.setText("Cantidad minima de producto p/Kg:");
-        jPanel1.add(minimoPorKgGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, 40));
+        jPanel1.add(minimoPorKgGFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 220, 40));
 
         descModGFV1.setBackground(new java.awt.Color(255, 255, 255));
         descModGFV1.setForeground(new java.awt.Color(0, 0, 0));
         descModGFV1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(descModGFV1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 450, 40));
+        jPanel1.add(descModGFV1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 450, 40));
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Precio Costo:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Precio Mayoreo:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, -1, -1));
+
+        precioCostoMod.setBackground(new java.awt.Color(255, 255, 255));
+        precioCostoMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel1.add(precioCostoMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 510, 450, 40));
+
+        precioMayoreoMod.setBackground(new java.awt.Color(255, 255, 255));
+        precioMayoreoMod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel1.add(precioMayoreoMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 570, 450, 40));
+
+        pUnidad.setForeground(new java.awt.Color(0, 0, 0));
+        pUnidad.setText("Por Unidad");
+        jPanel1.add(pUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+
+        pKg.setForeground(new java.awt.Color(0, 0, 0));
+        pKg.setText("Por Kg");
+        jPanel1.add(pKg, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, -1, -1));
+
+        seleccionaUnidadLabel.setForeground(new java.awt.Color(0, 0, 0));
+        seleccionaUnidadLabel.setText("Selecciona la el tipo:");
+        jPanel1.add(seleccionaUnidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 20));
+
+        jSeparator2GFV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jSeparator2GFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 810, 110));
 
         jSeparator1GFV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jSeparator1GFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 810, 510));
+        jPanel1.add(jSeparator1GFV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 810, 610));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 650));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,19 +222,32 @@ public class editarProductoGFV extends javax.swing.JFrame {
             if (producto != null) {
                 productoSeleccionadoGFV.setText(producto.getDescriptionGranel());
                 descModGFV1.setText(producto.getDescriptionGranel());
-                precioUnitModGFV.setText(String.valueOf(producto.getPrizeForUnit()));
-                precioPKgGFV.setText(String.valueOf(producto.getPrizeForKg()));
+                ultimoPrecioPorUnidad = producto.getPrizeForUnit();
+                ultimoPrecioPorKg = producto.getPrizeForKg();
+                
+                // Por defecto, selecciona el tipo disponible, y muestra el precio correspondiente:
+                if (ultimoPrecioPorUnidad > 0) {
+                    pUnidad.setSelected(true);
+                    precioUnitModGFV.setText(String.valueOf(ultimoPrecioPorUnidad));
+                } else {
+                    pKg.setSelected(true);
+                    precioUnitModGFV.setText(String.valueOf(ultimoPrecioPorKg));
+                }
                 cantidadpKgModGFV.setText(String.valueOf(producto.getAmountForKg()));
                 categoriaModGFV.setText(producto.getCategoryg());
                 cantidadMinimapKgModGFV.setText(String.valueOf(producto.getMinimumAmount()));
+                precioCostoMod.setText(String.valueOf(producto.getPrizeCost()));
+                precioMayoreoMod.setText(String.valueOf(producto.getPrizeWholesale()));
             } else {
                 productoSeleccionadoGFV.setText("Producto no encontrado");
                 descModGFV1.setText("");
                 precioUnitModGFV.setText("");
-                precioPKgGFV.setText("");
                 cantidadpKgModGFV.setText("");
                 categoriaModGFV.setText("");
                 cantidadMinimapKgModGFV.setText("");
+                precioCostoMod.setText("");
+                precioMayoreoMod.setText("");
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Código inválido o error en la consulta.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -210,14 +258,37 @@ public class editarProductoGFV extends javax.swing.JFrame {
         try {
             String id = codProdEditarGFV.getText().trim();
             String descripcion = descModGFV1.getText().trim();
-            float prizeForUnit = Float.parseFloat(precioUnitModGFV.getText().trim());
-            float prizeForKg = Float.parseFloat(precioPKgGFV.getText().trim());
+            float prizeForUnit = 0f;
+            float prizeForKg = 0f;
+            float precio = Float.parseFloat(precioUnitModGFV.getText().trim());
+            // Asignación según radiobutton seleccionado
+            if (pUnidad.isSelected()) {
+                prizeForUnit = precio;
+                prizeForKg = 0f;
+            } else if (pKg.isSelected()) {
+                prizeForKg = precio;
+                prizeForUnit = 0f;
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar si el precio es por unidad o por kilo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             float amountForKg = Float.parseFloat(cantidadpKgModGFV.getText().trim());
             String categoria = categoriaModGFV.getText().trim();
             float minimumAmount = Float.parseFloat(cantidadMinimapKgModGFV.getText().trim());
 
+            // Tomar los valores de costo y mayoreo:
+            float prizeCost = 0f;
+            float prizeWholesale = 0f;
+            try {
+                prizeCost = Float.parseFloat(precioCostoMod.getText().trim());
+            } catch (NumberFormatException ignored) {}
+            try {
+                prizeWholesale = Float.parseFloat(precioMayoreoMod.getText().trim());
+            } catch (NumberFormatException ignored) {}
+
             ProductoGranel producto = new ProductoGranel(
-                id, descripcion, prizeForKg, amountForKg, minimumAmount, prizeForUnit, categoria
+                id, descripcion, prizeForKg, amountForKg, minimumAmount, prizeForUnit, categoria, prizeCost, prizeWholesale
             );
 
             boolean exito = operacionesBD.modificarProductoGranel(producto);
@@ -271,15 +342,20 @@ public class editarProductoGFV extends javax.swing.JFrame {
     private javax.swing.JLabel existenciasIngresarGFV;
     private javax.swing.JButton ingresoProductoGFV;
     private javax.swing.JLabel instruccionLabelGFV;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1GFV;
     private javax.swing.JSeparator jSeparator2GFV;
     private javax.swing.JLabel minimoPorKgGFV;
     private javax.swing.JLabel modificacionLabelGFV;
-    private javax.swing.JTextField precioPKgGFV;
-    private javax.swing.JLabel precioPorKgIngresarGFV;
+    private javax.swing.JRadioButton pKg;
+    private javax.swing.JRadioButton pUnidad;
+    private javax.swing.JFormattedTextField precioCostoMod;
+    private javax.swing.JFormattedTextField precioMayoreoMod;
     private javax.swing.JFormattedTextField precioUnitModGFV;
     private javax.swing.JLabel precioUnitarioIngresarGFV;
     private javax.swing.JLabel productoSeleccionadoGFV;
+    private javax.swing.JLabel seleccionaUnidadLabel;
     // End of variables declaration//GEN-END:variables
 }

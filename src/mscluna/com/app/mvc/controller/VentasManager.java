@@ -83,7 +83,6 @@ public class VentasManager {
             }
         }
     }
-
     public void registrarVentaEnBD(OperacionesBD operacionesBD, double total) {
         LocalDateTime now = LocalDateTime.now();
         String fecha = now.toLocalDate().toString();
